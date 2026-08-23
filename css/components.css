@@ -474,6 +474,104 @@ select {
 }
 
 /* ==========================================================================
+   CHECK-IN VIEW COMPONENTS
+   ========================================================================== */
+.checkin-step {
+  display: none;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.checkin-step.active {
+  display: block;
+}
+
+.mood-options-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all 0.22s ease;
+  user-select: none;
+}
+
+.mood-option:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-3px);
+}
+
+.mood-option.selected {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+}
+
+.mood-icon-halo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--accent-blue);
+  transition: all 0.2s ease;
+}
+
+.mood-option.selected .mood-icon-halo {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.mood-option .mood-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mood-option .mood-score {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.factor-tag {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.factor-tag:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.factor-tag.selected {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+@media (max-width: 640px) {
+  .mood-options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
    OVERVIEW DASHBOARD COMPONENTS
    ========================================================================== */
 .overview-header {

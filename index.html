@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<link rel="stylesheet" href="css/variables.css?v=3.4">
-<link rel="stylesheet" href="css/base.css?v=3.4">
-<link rel="stylesheet" href="css/layout.css?v=3.4">
-<link rel="stylesheet" href="css/components.css?v=3.4">
-<link rel="stylesheet" href="css/sections.css?v=3.4">
-<link rel="stylesheet" href="css/animations.css?v=3.4">
+<link rel="stylesheet" href="css/variables.css?v=3.5">
+<link rel="stylesheet" href="css/base.css?v=3.5">
+<link rel="stylesheet" href="css/layout.css?v=3.5">
+<link rel="stylesheet" href="css/components.css?v=3.5">
+<link rel="stylesheet" href="css/sections.css?v=3.5">
+<link rel="stylesheet" href="css/animations.css?v=3.5">
 </head>
 <body>
 <canvas id="particles-canvas"></canvas>
@@ -128,6 +128,7 @@
 </div>
 <nav class="sidebar-nav" id="sidebar-nav">
 <a class="sidebar-nav-item active" data-view="overview" href="#" role="button"><i data-lucide="layout-dashboard" width="20" height="20"></i><span>Asosiy panel</span></a>
+<a class="sidebar-nav-item" data-view="checkin" href="#" role="button"><i data-lucide="smile" width="20" height="20"></i><span>Kayfiyat qaydi</span></a>
 <a class="sidebar-nav-item" data-view="videos" href="#" role="button"><i data-lucide="play-circle" width="20" height="20"></i><span>Videolar</span></a>
 <a class="sidebar-nav-item" data-view="resources" href="#" role="button"><i data-lucide="book-open" width="20" height="20"></i><span>Resurslar</span></a>
 <a class="sidebar-nav-item" data-view="ai" href="#" role="button"><i data-lucide="bot" width="20" height="20"></i><span>AI Yordamchi</span></a>
@@ -376,6 +377,103 @@ YouTube da ochish ↗
 </div>
 </div>
 
+</div>
+
+<!-- VIEW: CHECKIN (KAYFIYAT BELGILASH) -->
+<div class="app-view" id="view-checkin">
+  <div class="view-header">
+    <p class="view-eyebrow">Kunlik Qayd</p>
+    <h1 class="view-title">Bugungi <span class="gradient-text">Kayfiyatingiz</span></h1>
+    <p class="view-subtitle">His-tuyg'ularingizni belgilang va shaxsiy tavsiyalarga ega bo'ling.</p>
+  </div>
+
+  <div class="checkin-container glass-panel" style="max-width: 680px; margin: 0 auto;">
+    <!-- Step 1: Mood selection -->
+    <div class="checkin-step active" data-step="1">
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; text-align: center;">
+        Hozirgi holatingizni qanday baholaysiz?
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-bottom: 24px;">
+        Birini tanlang
+      </p>
+
+      <div class="mood-options-grid">
+        <div class="mood-option" data-mood="great" role="button" tabindex="0">
+          <div class="mood-icon-halo"><i data-lucide="sun" width="22" height="22"></i></div>
+          <span class="mood-name">A'lo</span>
+          <span class="mood-score">5/5</span>
+        </div>
+        <div class="mood-option" data-mood="good" role="button" tabindex="0">
+          <div class="mood-icon-halo"><i data-lucide="smile" width="22" height="22"></i></div>
+          <span class="mood-name">Yaxshi</span>
+          <span class="mood-score">4/5</span>
+        </div>
+        <div class="mood-option" data-mood="okay" role="button" tabindex="0">
+          <div class="mood-icon-halo"><i data-lucide="meh" width="22" height="22"></i></div>
+          <span class="mood-name">O'rtacha</span>
+          <span class="mood-score">3/5</span>
+        </div>
+        <div class="mood-option" data-mood="stressed" role="button" tabindex="0">
+          <div class="mood-icon-halo"><i data-lucide="cloud-rain" width="22" height="22"></i></div>
+          <span class="mood-name">Stressda</span>
+          <span class="mood-score">2/5</span>
+        </div>
+        <div class="mood-option" data-mood="overwhelmed" role="button" tabindex="0">
+          <div class="mood-icon-halo"><i data-lucide="battery-low" width="22" height="22"></i></div>
+          <span class="mood-name">Charchagan</span>
+          <span class="mood-score">1/5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Factors -->
+    <div class="checkin-step" data-step="2">
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; text-align: center;">
+        Bunga nimalar ta'sir qildi?
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-bottom: 24px;">
+        Bir yoki bir nechtasini tanlashingiz mumkin
+      </p>
+
+      <div class="factors-wrap" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px;">
+        <button type="button" class="factor-tag tag" data-factor="studies">O'qish & Darslar</button>
+        <button type="button" class="factor-tag tag" data-factor="sleep">Uyqu & Dam olish</button>
+        <button type="button" class="factor-tag tag" data-factor="friends">Do'stlar & Suhbat</button>
+        <button type="button" class="factor-tag tag" data-factor="family">Oila</button>
+        <button type="button" class="factor-tag tag" data-factor="health">Salomatlik</button>
+        <button type="button" class="factor-tag tag" data-factor="work">Ish & Loyihalar</button>
+        <button type="button" class="factor-tag tag" data-factor="future">Kelajak & Rejalar</button>
+        <button type="button" class="factor-tag tag" data-factor="finances">Moliya</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Result -->
+    <div class="checkin-step" data-step="3">
+      <div style="text-align: center; padding: 12px 0;">
+        <div class="summary-icon-halo" style="width: 56px; height: 56px; margin: 0 auto 16px; background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.3);">
+          <i data-lucide="check" width="28" height="28" style="color: var(--accent-blue);"></i>
+        </div>
+        <h3 id="result-mood" style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 10px;">
+          Kayfiyat Qayd Etildi
+        </h3>
+        <p id="result-text" style="font-size: 0.92rem; color: var(--text-secondary); max-width: 480px; margin: 0 auto 24px; line-height: 1.6;">
+          Qaydingiz muvaffaqiyatli saqlandi.
+        </p>
+
+        <div id="checkin-actions-wrap" style="display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 0 auto;"></div>
+      </div>
+    </div>
+
+    <!-- Navigation footer for steps 1 & 2 -->
+    <div class="checkin-nav" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--glass-border); padding-top: 18px; margin-top: 10px;">
+      <button type="button" class="btn btn-secondary btn-sm" id="checkin-back" style="visibility: hidden;">
+        <i data-lucide="arrow-left" width="16" height="16"></i> Ortga
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" id="checkin-next" style="margin-left: auto;">
+        Davom etish <i data-lucide="arrow-right" width="16" height="16"></i>
+      </button>
+    </div>
+  </div>
 </div>
 
 <!-- VIEW: VIDEOS -->
@@ -738,15 +836,15 @@ Koinotga Yuborish
 <div id="toast-container" class="toast-container"></div>
 
 <script src="https://js.puter.com/v2/"></script>
-<script src="js/storage.js?v=3.4"></script>
-<script src="js/auth.js?v=3.4"></script>
-<script src="js/app.js?v=3.4"></script>
-<script src="js/checkin.js?v=3.4"></script>
-<script src="js/dashboard.js?v=3.4"></script>
-<script src="js/resources.js?v=3.4"></script>
-<script src="js/ai-assistant.js?v=3.4"></script>
-<script src="js/reset.js?v=3.4"></script>
-<script src="js/video-curator.js?v=3.4"></script>
-<script src="js/cosmos-reset.js?v=3.4"></script>
+<script src="js/storage.js?v=3.5"></script>
+<script src="js/auth.js?v=3.5"></script>
+<script src="js/app.js?v=3.5"></script>
+<script src="js/checkin.js?v=3.5"></script>
+<script src="js/dashboard.js?v=3.5"></script>
+<script src="js/resources.js?v=3.5"></script>
+<script src="js/ai-assistant.js?v=3.5"></script>
+<script src="js/reset.js?v=3.5"></script>
+<script src="js/video-curator.js?v=3.5"></script>
+<script src="js/cosmos-reset.js?v=3.5"></script>
 </body>
 </html>
