@@ -297,6 +297,8 @@
 
     toggleBtn.addEventListener('click', function () {
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    });
+
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
         panel.style.display = 'none';
@@ -305,8 +307,8 @@
 
     if (saveBtn) {
       saveBtn.addEventListener('click', function () {
-        var key = (keyInput ? keyInput.value : '').trim();
-        var prov = provSelect ? provSelect.value : 'gemini';
+        var key = (input ? input.value : '').trim();
+        var prov = providerSelect ? providerSelect.value : 'gemini';
 
         localStorage.setItem(STORAGE_KEY, key);
         localStorage.setItem(STORAGE_PROVIDER, prov);
@@ -314,60 +316,86 @@
 
         if (statusEl) {
           if (key) {
-            statusEl.textContent = '✅ API kaliti saqlandi! Jonli ' + prov.toUpperCase() + ' modeli faol.';
+            statusEl.textContent = 'API kaliti saqlandi! Jonli ' + prov.toUpperCase() + ' modeli faol.';
             statusEl.style.color = '#10b981';
           } else {
-            statusEl.textContent = 'ℹ️ Kalit tozalandi. O\'rnatilgan aqlli CBT modeli faol.';
-            statusEl.style.color = '#3b82f6';
+            statusEl.textContent = 'Standart ChatGPT rejimi faol.';
+            statusEl.style.color = 'var(--accent-blue)';
           }
         }
         if (window.showToast) {
-          window.showToast(key ? 'API kaliti saqlandi!' : 'Lokal CBT rejimiga o\'tildi', 'success');
+          window.showToast(key ? 'API kaliti saqlandi!' : 'Standart rejimga o\'tildi', 'success');
         }
+        setTimeout(function () {
+          panel.style.display = 'none';
+        }, 800);
       });
     }
   }
 
+  /* ═══ 6. MATN FORMATLASH ═══ */
+  function fmt(t) {
+    return (t || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\n\n/g, '</p><p style="margin-top:10px">')
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.85em;color:#60a5fa">$1</code>');
+  }
+
   /* ═══ 7. INIT ═══ */
-  document.addEventListener('DOMContentLoaded', function () {
+  function init() {
     if (!document.getElementById('ai-dot-css')) {
       var s = document.createElement('style');
       s.id = 'ai-dot-css';
       s.textContent =
         '@keyframes aidotAnim{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}' +
-        '.aidot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8b5cf6;animation:aidotAnim 1.2s infinite;}';
+        '.aidot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3b82f6;animation:aidotAnim 1.2s infinite;}';
       document.head.appendChild(s);
     }
 
     welcome();
-    initApiKeySettings();
+    initAPIKeyPanel();
 
     /* Send button */
-    document.getElementById('chat-send-btn')?.addEventListener('click', function () {
-      send((document.getElementById('chat-input') || {}).value || '');
-    });
+    var sendBtn = document.getElementById('chat-send-btn');
+    if (sendBtn) {
+      sendBtn.onclick = function (e) {
+        e.preventDefault();
+        var inp = document.getElementById('chat-input');
+        if (inp) send(inp.value);
+      };
+    }
 
     /* Enter */
-    document.getElementById('chat-input')?.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        send(this.value);
-      }
-    });
+    var chatInp = document.getElementById('chat-input');
+    if (chatInp) {
+      chatInp.onkeydown = function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          send(this.value);
+        }
+      };
+    }
 
     /* Prompt chips */
     document.querySelectorAll('.prompt-chip').forEach(function (chip) {
-      chip.addEventListener('click', function () {
+      chip.onclick = function () {
         var text = chip.textContent.replace(/^[^\w\s\u0400-\u04FF\u00C0-\u024F]+/u, '').trim();
         send(text || chip.textContent.trim());
-      });
+      };
     });
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
 
   window.initAIChat = function () {
     var c = document.getElementById('chat-messages');
     if (!c || c.children.length === 0) {
-      welcome();
+      init();
     }
   };
 })();
