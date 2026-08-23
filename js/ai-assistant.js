@@ -33,44 +33,7 @@
     return null;
   }
 
-  /* ═══ 1. LIVE CHATGPT (PUTER.JS) ═══ */
-  function callPuterAI(text, callback) {
-    if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') {
-      var prompt = SYSTEM_PROMPT + "\n\nSuhbat tarixi:\n";
-      var recent = history.slice(-6);
-      for (var i = 0; i < recent.length; i++) {
-        prompt += (recent[i].role === 'assistant' ? 'AI: ' : 'Foydalanuvchi: ') + recent[i].content + "\n";
-      }
-      prompt += "Foydalanuvchi: " + text + "\nAI:";
-
-      window.puter.ai.chat(prompt)
-        .then(function (res) {
-          var reply = '';
-          if (typeof res === 'string') {
-            reply = res;
-          } else if (res && res.message && res.message.content) {
-            reply = res.message.content;
-          } else if (res && res.text) {
-            reply = res.text;
-          } else if (res && typeof res.toString === 'function') {
-            reply = res.toString();
-          }
-
-          if (reply && reply.trim() && reply.trim() !== '[object Object]') {
-            callback(null, reply.trim());
-          } else {
-            callback(new Error('Puter empty'));
-          }
-        })
-        .catch(function (err) {
-          callback(err);
-        });
-    } else {
-      callback(new Error('Puter not initialized'));
-    }
-  }
-
-  /* ═══ 2. SMART NATURAL CONVERSATIONAL ENGINE (OFFLINE/FALLBACK) ═══ */
+  /* ═══ 1. SMART NATURAL CONVERSATIONAL ENGINE ═══ */
   function getSmartChatGPTReply(text) {
     var l = (text || '').toLowerCase().trim();
     var clean = l.replace(/['`’‘]/g, '').replace(/[^a-z0-9\s]/g, ' ');
@@ -230,28 +193,30 @@
     }
 
     var mathRes = trySolveMath(text);
-    if (mathRes) { setTimeout(function () { finish(mathRes); }, 300); return; }
+    if (mathRes) {
+      setTimeout(function () { finish(mathRes); }, 300);
+      return;
+    }
 
-    function fallbackPuterOrSmart() {
-      callPuterAI(text, function (err, reply) {
-        if (!err && reply) { finish(reply); } else {
-          setTimeout(function () { finish(getSmartChatGPTReply(text)); }, 400);
-        }
-      });
+    function replySmart() {
+      var delay = 350 + Math.floor(Math.random() * 250);
+      setTimeout(function () {
+        finish(getSmartChatGPTReply(text));
+      }, delay);
     }
 
     if (apiKey) {
       if (provider === 'gemini') {
         callGemini(apiKey, text, function (err, reply) {
-          if (!err && reply) finish(reply); else fallbackPuterOrSmart();
+          if (!err && reply) finish(reply); else replySmart();
         });
       } else {
         callOpenAI(apiKey, provider, text, function (err, reply) {
-          if (!err && reply) finish(reply); else fallbackPuterOrSmart();
+          if (!err && reply) finish(reply); else replySmart();
         });
       }
     } else {
-      fallbackPuterOrSmart();
+      replySmart();
     }
   }
 
