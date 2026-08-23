@@ -1,6 +1,6 @@
 /**
- * Youth Mental Wellness — AI Companion & Kognitiv CBT Suhbatdosh
- * Jonli AI API (Google Gemini, OpenAI, Groq) + Offline Kognitiv CBT Dvigateli
+ * Youth Mental Wellness — ChatGPT Universal AI Companion
+ * Universal Sun'iy Intellekt (ChatGPT-4o-mini & Kognitiv Yordamchi)
  */
 (function () {
   'use strict';
@@ -13,41 +13,37 @@
   var defIdx = 0;
 
   var SYSTEM_PROMPT =
-    "Siz universal, o'ta aqlli va har qanday savolga aniq, tushunarli, to'g'ri va do'stona javob beruvchi sun'iy intellektsiz (ChatGPT kabi). O'zbek tilida so'zlashasiz.\n" +
-    "Foydalanuvchi sizdan xohlagan mavzuda: matematika (masalan, 3-2=1), fan, dasturlash, psixologiya, hayotiy maslahat, tarix, qiziqarli faktlar, ta'lim, kognitiv CBT terapiya yoki shunchaki erkin suhbat uchun savol berishi mumkin.\n" +
-    "Har bir savolga to'liq, lo'nda va chiroyli formatda (markdown, qalin so'zlar, punktlar va emoji bilan) javob qaytaring.";
+    "Siz universal, o'ta aqlli, do'stona va har qanday savolga aniq, to'g'ri, lo'nda javob beruvchi sun'iy intellektsiz (ChatGPT kabi). O'zbek tilida erkin va ravon gaplashasiz.\n" +
+    "Foydalanuvchi sizdan xohlagan mavzuda: salomlashish, hol-ahvol so'rash (masalan, 'zormisan', 'nima gap'), dasturlash va kod yozish, matematika va hisob-kitob, psixologiya va CBT maslahatlari, ilm-fan, ta'lim, tarix, falsafa yoki oddiy erkin suhbat uchun savol berishi mumkin.\n" +
+    "Har bir savolga ChatGPT kabi tabiiy, to'liq va tartibli formatda javob bering.";
 
-  /* ═══ MATEMATIK HISOB-KITOBLARNI ZUMDA YECHISH ═══ */
+  /* ═══ MATEMATIK HISOB-KITOBLARNI TEZKOR YECHISH ═══ */
   function trySolveMath(text) {
     var raw = (text || '').trim();
-    var m = raw.match(/([0-9\s+\-*/().^%]+)/);
-    var candidate = m ? m[1].replace(/\s+/g, '') : '';
-    if (candidate && /[0-9]/.test(candidate) && /[+\-*/^%]/.test(candidate) && !/[a-zA-Z_]/.test(candidate)) {
+    var m = raw.match(/^([0-9\s+\-*/().^%]+)$/);
+    if (m && /[0-9]/.test(raw) && /[+\-*/^%]/.test(raw) && !/[a-zA-Z_]/.test(raw)) {
       try {
-        var exp = candidate.replace(/\^/g, '**');
+        var exp = raw.replace(/\^/g, '**');
         var res = Function('"use strict";return (' + exp + ')')();
         if (typeof res === 'number' && !isNaN(res) && isFinite(res)) {
-          return "**Javob:** `" + candidate + " = " + res + "` 🎯\n\n" +
-                 "Agar yana biror hisob-kitob, matematika yoki boshqa savollaringiz bo'lsa, bemalol so'rang!";
+          return "**Natija:** `" + raw + " = " + res + "`\n\nYana biror hisob-kitob yoki boshqa savolingiz bo'lsa, bemalol yozing.";
         }
       } catch (e) {}
     }
     return null;
   }
 
-  /* ═══ LIVE CHATGPT (PUTER.JS ORQALI) ═══ */
+  /* ═══ 1. LIVE CHATGPT (PUTER.JS) ═══ */
   function callPuterAI(text, callback) {
     if (window.puter && window.puter.ai && typeof window.puter.ai.chat === 'function') {
-      var msgs = [
-        { role: 'system', content: SYSTEM_PROMPT }
-      ];
+      var prompt = SYSTEM_PROMPT + "\n\nSuhbat tarixi:\n";
       var recent = history.slice(-6);
       for (var i = 0; i < recent.length; i++) {
-        msgs.push({ role: recent[i].role === 'assistant' ? 'assistant' : 'user', content: recent[i].content });
+        prompt += (recent[i].role === 'assistant' ? 'AI: ' : 'Foydalanuvchi: ') + recent[i].content + "\n";
       }
-      msgs.push({ role: 'user', content: text });
+      prompt += "Foydalanuvchi: " + text + "\nAI:";
 
-      window.puter.ai.chat(msgs, { model: 'gpt-4o-mini' })
+      window.puter.ai.chat(prompt)
         .then(function (res) {
           var reply = '';
           if (typeof res === 'string') {
@@ -56,145 +52,77 @@
             reply = res.message.content;
           } else if (res && res.text) {
             reply = res.text;
+          } else if (res && typeof res.toString === 'function') {
+            reply = res.toString();
           }
-          if (reply && reply.trim()) {
+
+          if (reply && reply.trim() && reply.trim() !== '[object Object]') {
             callback(null, reply.trim());
           } else {
-            callback(new Error('Puter empty response'));
+            callback(new Error('Puter empty'));
           }
         })
         .catch(function (err) {
           callback(err);
         });
     } else {
-      callback(new Error('Puter AI not available'));
+      callback(new Error('Puter not initialized'));
     }
   }
 
-  /* ═══ 1. OFFLINE AQLLI CBT & SUHBATDOSH DVIGATELI ═══ */
-  var CBT_RESPONSES = [
-    // 1. Salomlashish va hol-ahvol
-    {
-      k: ['qalesan', 'qandaysan', 'qalesiz', 'qandaysiz', 'qalaysan', 'qalaysiz', 'salom', 'assalom', 'privet', 'salam', 'tinchmi', 'nima gap', 'ishlar qalay', 'ahvol', 'yaxshimisiz', 'hormang', 'hayrli tong', 'xayrli kun', 'xayrli kech'],
-      r: "Assalomu alaykum! Zo'r, rahmat! 😊 Sizning hol-ahvollaringiz qalay?\n\nBugun kayfiyatingiz va kuningiz qanday o'tmoqda? Qanday yangiliklar yoki qiziq mavzular bor?"
-    },
-    // 2. Tanishuv va vazifasi
-    {
-      k: ['kimsan', 'kimsen', 'sen kimsan', 'nima qila olasan', 'vazifang nima', 'nima bilasan', 'botmisan', 'robotmisan', 'isming nima', 'qobiliyating'],
-      r: "Men — **Youth Mental Wellness** loyihasining sun'iy intellekt kognitiv-psixologik (CBT) do'stingizman! 🧠✨\n\nMenga quyidagi mavzularda bemalol murojaat qilishingiz mumkin:\n• 🌿 **Stress, vahima va xavotirni kamaytirish**\n• 📚 **O'qish, imtihon va vaqtni boshqarish**\n• 🎯 **O'ziga ishonchni oshirish va dangasalikni yengish**\n• 💭 **To'xtovsiz o'y-fikrlar (overthinking)ni tinchlantirish**\n• 🌙 **Sog'lom uyqu va ruhiy quvvatni tiklash**\n\nBugun sizga qaysi masalada yordam bera olaman?"
-    },
-    // 3. Ijobiy kayfiyat
-    {
-      k: ['zo\'r', 'yaxshiman', 'ajoyib', 'juda yaxshi', 'hammasi joyida', 'shukur', 'alhamdulillah', 'yomon emas', 'kayfiyatim yaxshi'],
-      r: "Buni eshitishdan juda xursandman! 🎉 Ijobiy kayfiyat — yangi marralar va maqsadlar uchun eng yaxshi quvvat.\n\nBugungi kuningiz yanada unumli va qiziqarli o'tishi uchun qanday rejalaringiz bor?"
-    },
-    // 4. Minnatdorchilik
-    {
-      k: ['rahmat', 'raxmat', 'katta rahmat', 'tashakkur', 'minnatdorman', 'yordam berding', 'foydali bo\'ldi'],
-      r: "Arzimaydi, sizga foydam tekkanidan juda xursandman! 😊 Doim yoningizdaman. Agar yana biror savol yoki fikringiz bo'lsa, bemalol yozavering. O'zingizni ehtiyot qiling! 💙"
-    },
-    // 5. Dangasalik va boshlay olmaslik
-    {
-      k: ['dangasa', 'erinchoq', 'erin', 'surish', 'kechiktir', 'boshlay olmayapman', 'iroda', 'prokrastinatsiya'],
-      r: "Dangasalik ko'pincha kuchsizlik emas, balki boshlanajak ishning miyaga haddan tashqari katta yoki noaniq tuyulishidir! 🎯\n\n" +
-         "**⚡ 5 soniya qoidasi (Mel Robbins):**\n" +
-         "5-4-3-2-1 deb orqaga sanang va hech narsa haqida ortiqcha o'ylamasdan o'rningizdan turib eng kichik birinchi qadamni qo'ying (masalan, daftarni ochish yoki stolga o'tirish).\n\n" +
-         "Qaysi ishni orqaga suryapsiz? Keling, uni hozir birgalikda 2 daqiqalik kichik bo'lakka ajratamiz!"
-    },
-    // 6. Xavotir, vahima, qo'rquv, stress
-    {
-      k: ['xavotir', 'qo\'rq', 'vahima', 'panik', 'stress', 'bezovta', 'yuragim', 'tashvish', 'asab'],
-      r: "Sizdagi bu xavotirni tushunaman va buni his qilish mutlaqo tabiiy. 🌿\n\n" +
-         "**🧠 CBT Tahlili: Fikr va Dalil (Fact vs Thought)**\n" +
-         "Xavotir ko'pincha noaniqlikni \"eng yomon ssenariy\" sifatida talqin qilishdan kelib chiqadi.\n\n" +
-         "**💡 Kognitiv qayta baholash savollari:**\n" +
-         "1. Bu qo'rquvingizni 100% tasdiqlovchi aniq faktlar bormi yoki bu shunchaki ongingiz taxminimi?\n" +
-         "2. Eng yomon holat yuz berganda ham, sizda bunga qarshi qanday ichki kuch va choralar bor?\n\n" +
-         "✨ **Amaliy mikro-mashq (4-4-6 nafas):** Hozir 4 soniya burun orqali chuqur nafas oling, 4 soniya ushlab turing va 6 soniya og'iz orqali sekin chiqaring."
-    },
-    // 7. O'ziga ishonchsizlik
-    {
-      k: ['ishonch', 'uddalay', 'xato', 'omadsiz', 'aybdor', 'yetarli', 'imposter', 'qo\'limdan kelm', 'yaramsiz', 'past baholash'],
-      r: "O'zingizga nisbatan haddan tashqari qattiqqo'l bo'layotganingizni sezmoqdaman. Siz yolg'iz emassiz. 💙\n\n" +
-         "**🧠 CBT Tahlili: \"Barchasi yoki hech narsa\" tuzog'i**\n" +
-         "Miya bitta xato yoki vaqtinchalik qiyinchilik tufayli butun shaxsingizni \"omadsiz\" deb tamg'alashga moyil bo'ladi. Ammo bu xolis haqiqat emas.\n\n" +
-         "**💡 Do'stona nigoh mashqi:**\n" +
-         "Agar eng yaqin do'stingiz xuddi shunday vaziyatga tushsa, unga nima degan bo'lardingiz? Siz unga tanqid emas, dalda bergan bo'lardingiz. O'zingizga ham xuddi shunday mehr bilan munosabatda bo'ling.\n\n" +
-         "🌱 **Yodda tuting:** Har bir xato — bu yangi tajriba va o'sish imkoniyati."
-    },
-    // 8. Overthinking va to'xtovsiz fikrlar
-    {
-      k: ['overthinking', 'o\'ylayapman', 'miyam', 'tinchlan', 'uxlay', 'xayol', 'uyqu', 'fikrlar', 'boshim qotdi'],
-      r: "Ongingiz to'xtovsiz aylanayotgan fikrlar girdobida qolganga o'xshaydi. 🌌\n\n" +
-         "**🧠 CBT Tahlili: Fikrlar — bu fakt emas**\n" +
-         "Ongimiz kuniga minglab tasodifiy fikrlarni ishlab chiqaradi. Har bir fikr haqiqat ekanligini anglatmaydi.\n\n" +
-         "**⚓ 5-4-3-2-1 Grounding (Yerga ulanish) mashqi:**\n" +
-         "• **5 ta** xonadagi ko'rinib turgan narsani ko'z bilan toping.\n" +
-         "• **4 ta** teginishingiz mumkin bo'lgan narsani his qiling.\n" +
-         "• **3 ta** eshitilayotgan tovushga diqqat qarating.\n" +
-         "• **2 ta** chuqur va xotirjam nafas oling.\n" +
-         "• **1 ta** ijobiy haqiqat: *\"Men hozirgi lahzada xavfsizman va hammasi o'tib ketadi.\"*"
-    },
-    // 9. Ruhiy charchoq va tushkunlik
-    {
-      k: ['charchad', 'quvvat', 'kuchim', 'tushkun', 'yig\'la', 'ma\'nosiz', 'og\'ir', 'yolg\'iz', 'holsiz', 'siqildim', 'kayfiyatim yo\'q', 'zerikdim'],
-      r: "Ichingizdagi bu og'irlik va charchoqni tushunaman. O'zingizni erkin his qiling. 🕊️\n\n" +
-         "**🧠 Kichik tanaffus va tiklanish:**\n" +
-         "Ruhiy charchoq paytida miya hamma narsadan toliqadi. Hozir o'zingizni hech narsaga majburlamang.\n\n" +
-         "**🌱 Kichik qadam:**\n" +
-         "Bir piyola iliq choy yoki suv iching, derazadan toza havodan nafas oling yoki shunchaki 10 daqiqa ko'zingizni yumib dam oling. Siz tiklanishga to'la haqlisiz."
-    },
-    // 10. Imtihon, dars, o'qish, test
-    {
-      k: ['imtihon', 'dars', 'o\'qish', 'sessiya', 'karyera', 'ulgur', 'ish', 'bosim', 'dtm', 'universitet', 'maktab', 'test'],
-      r: "O'qish va imtihon bosimi paytida xavotirga tushish ko'pchilikda bo'ladi. 🎯\n\n" +
-         "**💡 Pomodoro va bo'laklarga ajratish strategiyasi:**\n" +
-         "Katta hajmdagi darslarni birdaniga ko'rib vahimaga tushmang. Diqqatingizni faqat keyingi **25 daqiqaga** qarating va keyin 5 daqiqa tanaffus qiling.\n\n" +
-         "Aynan qaysi fan yoki mavzuda qiynalyapsiz? Rejani birgalikda tuzamiz!"
-    },
-    // 11. Ijtimoiy munosabatlar va boshqalarning fikri
-    {
-      k: ['odamlar', 'ijtimoiy', 'taqqos', 'xijolat', 'gap-so\'z', 'boshqalar', 'uyal', 'munosabat', 'do\'stim', 'ota-onam'],
-      r: "Boshqalarning fikri yoki ijtimoiy taqqoslash sababli yuzaga kelgan bosim og'ir tuyulishi mumkin. 🤝\n\n" +
-         "**💡 Shaxsiy mezonlar:**\n" +
-         "Har kimning o'z yo'li va hayotiy sur'ati bor. Sizning qadringiz boshqalarning bahosi bilan belgilanmaydi. O'z qadriyatlaringizga ishoning."
-    },
-    // 12. Motivatsiya yoki maslahat so'rash
-    {
-      k: ['motivatsiya', 'maslahat', 'maslahating', 'nima qilay', 'yordam ber', 'ilhom', 'fakt'],
-      r: "Sizga hozir kerak bo'lgan eng muhim maslahat: **katta natijalar kichik odatlarning yig'indisidir!** 🌟\n\n" +
-         "Mukammallik (perfeksionizm)ni quvmang, shunchaki har kuni 1% yaxshiroq bo'lishga harakat qiling. Bugun o'zingiz uchun qaysi kichik qadamni tashlashga tayyorsiz?"
-    }
-  ];
-
-  function getLocalCBTReply(text) {
+  /* ═══ 2. SMART NATURAL CONVERSATIONAL ENGINE (OFFLINE/FALLBACK) ═══ */
+  function getSmartChatGPTReply(text) {
     var l = (text || '').toLowerCase().trim();
-    for (var i = 0; i < CBT_RESPONSES.length; i++) {
-      for (var j = 0; j < CBT_RESPONSES[i].k.length; j++) {
-        if (l.indexOf(CBT_RESPONSES[i].k[j]) !== -1) {
-          return CBT_RESPONSES[i].r;
-        }
-      }
-    }
-    var defaults = [
-      "Sizni diqqat bilan tinglamoqdaman. 🌿 Bu mavzu haqida batafsilroq aytib bera olasizmi? Aynan qaysi jihati sizni ko'proq o'ylantiryapti?",
-      "Fikringizni tushundim. 💙 Keling, bunga yangicha nigoh bilan qaraymiz: bu vaziyatda siz uchun eng yaxshi yechim nima bo'lishi mumkin?",
-      "Ochiq yozganingiz uchun rahmat. 🌟 Keling, birgalikda bu masalani bosqichma-bosqich yechamiz. Qanday his qilyapsiz?"
-    ];
-    return defaults[(defIdx++) % defaults.length];
-  }
+    var clean = l.replace(/['`’‘]/g, '').replace(/[^a-z0-9\s]/g, ' ');
 
-  /* ═══ 2. MATN FORMATLASH ═══ */
-  function fmt(t) {
-    return (t || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/\n\n/g, '</p><p style="margin-top:10px">')
-      .replace(/\n/g, '<br>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/•/g, '<span style="color:var(--accent-blue)">•</span>');
+    if (clean.match(/\b(zormisan|zormisiz|zo'rmisan|zo'rmisiz|qalesan|qalesiz|qandaysan|qandaysiz|qalaysan|qalaysiz|ahvol|ahvollar|tinchmi|tinchlikmi|nima gap|nima gaplar|ishlar qalay|yaxshimisiz|tuzukmisiz)\b/)) {
+      var salomResponses = [
+        "Rahmat, juda yaxshi! O'zingizda nima gaplar? Kuningiz qanday o'tyapti? Qanday savolingiz bo'lsa bemalol bering, barchasiga javob berishga tayyorman.",
+        "Zo'r, rahmat! Siz yaxshimisiz? Bugun qanday rejalaringiz bor yoki qaysi mavzuda suhbatlashamiz?",
+        "Hammasi ajoyib! Sizning hol-ahvollaringiz qalay? Sizga qanday yordam bera olaman?"
+      ];
+      return salomResponses[Math.floor(Math.random() * salomResponses.length)];
+    }
+
+    if (clean.match(/\b(salom|assalom|assalomu|privet|salam|hayrli tong|xayrli tong|hayrli kun|xayrli kun|hayrli kech|xayrli kech)\b/)) {
+      return "Assalomu alaykum! Xush kelibsiz. Qanday savolingiz yoki yordam kerak bo'lgan mavzu bor? Bemalol yozing.";
+    }
+
+    if (clean.match(/\b(kimsan|kimsen|sen kimsan|nima qila olasan|vazifang nima|nima bilasan|botmisan|robotmisan|isming nima|qobiliyating)\b/)) {
+      return "Men sizning shaxsiy ChatGPT sun'iy intellekt yordamchingizman.\n\nMenga xohlagan savolingizni berishingiz mumkin:\n• Ilm-fan, texnologiya, dasturlash va kod yozish\n• Matematik va mantiqiy masalalar\n• Psixologiya, stressni boshqarish va hayotiy maslahatlar\n• O'qish, imtihonlar va vaqtni rejalashtirish\n• Erkin do'stona suhbat va savol-javoblar\n\nHozir sizni qaysi mavzu qiziqtiryapti?";
+    }
+
+    if (clean.match(/\b(rahmat|raxmat|katta rahmat|tashakkur|minnatdorman|spasibo|yordam berding|gap yoq|gap yo'q|tushundim)\b/)) {
+      return "Arzimaydi, yordam berganimdan juda xursandman! Yana biror savolingiz yoki fikringiz bo'lsa, bemalol yozavering.";
+    }
+
+    if (clean.match(/\b(zor|zo'r|yaxshiman|ajoyib|juda yaxshi|alhamdulillah|shukur|yomon emas)\b/)) {
+      return "Buni eshitishdan xursandman! Ijobiy kayfiyat davom etsin. Bugun nimalar ustida ishlamoqchisiz yoki qanday mavzuda fikr almashamiz?";
+    }
+
+    if (clean.match(/\b(kod|dasturlash|programming|python|javascript|html|css|react|sql|java|c\+\+|sayt|backend|frontend)\b/)) {
+      return "**Dasturlash bo'yicha yordam:**\n\nMen JavaScript, Python, C++, HTML/CSS, SQL va boshqa ko'plab tillarda kod yozish, xatolarni (bug) topish yoki loyihangiz arxitekturasini tuzishda yordam bera olaman.\n\nAynan qaysi tilda qanday kod yozishimiz kerak? Kod parchasini yoki vazifani yozing.";
+    }
+
+    if (clean.match(/\b(xavotir|qorquv|qo'rquv|vahima|stress|bezovta|siqildim|asab|tashvish)\b/)) {
+      return "**Stress va xavotirni yengish bo'yicha tavsiyalar:**\n\n1. **Fakt va taxminni ajrating:** Xavotir ko'pincha miyaning noaniqlikni eng yomon ssenariy sifatida tasavvur qilishidan kelib chiqadi. Haqiqatda nima sodir bo'layotganiga qarang.\n2. **Nazorat zonasi:** Faqat o'zingiz o'zgartira oladigan narsalarga diqqat qarating.\n3. **Chuqur nafas oling:** 4 soniya burundan nafas oling, 4 soniya ushlab turing va 6 soniya og'izdan chiqaring.\n\nSizni aynan nima bezovta qilyapti? Xohlasangiz batafsil aytib bering.";
+    }
+
+    if (clean.match(/\b(dangasa|erinchoq|erin|surish|kechiktir|boshlay olmayapman|iroda|prokrastinatsiya)\b/)) {
+      return "**Dangasalikni yengish strategiyasi:**\n\n• **2 daqiqa qoidasi:** Ishni butunlay qilish haqida emas, faqat birinchi 2 daqiqasini qilish haqida o'ylang (masalan, daftarni ochish yoki bitta qator kod yozish).\n• **5-4-3-2-1 hisobi:** Orqaga sanang va ortiqcha o'ylamay darhol harakatga o'ting.\n\nQaysi vazifani boshlash kerak? Keling, uni eng kichik qadamlarga bo'lamiz.";
+    }
+
+    if (clean.match(/\b(uyqu|uxlay|charchad|quvvat|holsiz|uyqusizlik|kechasi)\b/)) {
+      return "**Uyqu va quvvatni tiklash:**\n\n• Uyqudan 1 soat oldin ekranlarni (telefon, noutbuk) chetga suring.\n• Xonani shamollatib, salqin havo yarating.\n• Bir stakan iliq suv yoki choy ichib, miyani tinchlantirish.\n\nBugun o'zingizga to'liq dam olish uchun imkoniyat bering.";
+    }
+
+    var defaults = [
+      "Fikringizni tushundim. Bu masala haqida yana qanday aniq savollaringiz yoki rejalaringiz bor? Batafsil davom ettirishimiz mumkin.",
+      "Ajoyib savol. Buni tahlil qilish uchun quyidagi jihatlarga e'tibor qaratishimiz mumkin. Sizga aynan qaysi yo'nalishda batafsil ma'lumot kerak?",
+      "Sizni tinglayapman. Istalgan mavzuda — bilim, maslahat, tahlil yoki kod bo'yicha savolingizni bering, to'liq tushuntirib beraman."
+    ];
+
+    return defaults[(defIdx++) % defaults.length];
   }
 
   /* ═══ 3. CHAT XABARLARINI CHIQARISH ═══ */
@@ -243,101 +171,40 @@
     if (e) e.remove();
   }
 
-  /* ═══ 4. API CALL HANDLERS (GEMINI, OPENAI, GROQ) ═══ */
-
+  /* ═══ 4. API CALL HANDLERS ═══ */
   function callGemini(apiKey, text, callback) {
     var endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + encodeURIComponent(apiKey);
-
     var contents = [];
     var recent = history.slice(-8);
     for (var i = 0; i < recent.length; i++) {
-      contents.push({
-        role: recent[i].role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: recent[i].content }]
-      });
+      contents.push({ role: recent[i].role === 'assistant' ? 'model' : 'user', parts: [{ text: recent[i].content }] });
     }
-
-    var payload = {
-      systemInstruction: {
-        parts: [{ text: SYSTEM_PROMPT }]
-      },
-      contents: contents,
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 1000
-      }
-    };
-
+    var payload = { systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }, contents: contents, generationConfig: { temperature: 0.7, maxOutputTokens: 1000 } };
     var xhr = new XMLHttpRequest();
     xhr.open('POST', endpoint, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.timeout = 25000;
-
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          var res = JSON.parse(xhr.responseText);
-          var replyText = res.candidates[0].content.parts[0].text;
-          callback(null, replyText);
-        } catch (e) {
-          callback(e);
-        }
-      } else {
-        callback(new Error('Gemini HTTP ' + xhr.status));
-      }
+        var res = JSON.parse(xhr.responseText);
+        callback(null, res.candidates[0].content.parts[0].text);
+      } else { callback(new Error('Gemini error')); }
     };
-
-    xhr.onerror = xhr.ontimeout = function () {
-      callback(new Error('Gemini Network Error'));
-    };
-
     xhr.send(JSON.stringify(payload));
   }
 
   function callOpenAI(apiKey, provider, text, callback) {
-    var url = provider === 'groq'
-      ? 'https://api.groq.com/openai/v1/chat/completions'
-      : 'https://api.openai.com/v1/chat/completions';
-
-    var model = provider === 'groq' ? 'llama-3.1-8b-instant' : 'gpt-4o-mini';
-
-    var msgs = [{ role: 'system', content: SYSTEM_PROMPT }];
-    var recent = history.slice(-8);
-    for (var i = 0; i < recent.length; i++) {
-      msgs.push({ role: recent[i].role, content: recent[i].content });
-    }
-
-    var payload = {
-      model: model,
-      messages: msgs,
-      temperature: 0.7,
-      max_tokens: 1000
-    };
-
+    var url = provider === 'groq' ? 'https://api.groq.com/openai/v1/chat/completions' : 'https://api.openai.com/v1/chat/completions';
+    var payload = { model: provider === 'groq' ? 'llama-3.1-8b-instant' : 'gpt-4o-mini', messages: [{ role: 'system', content: SYSTEM_PROMPT }].concat(history.slice(-8)), temperature: 0.7 };
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', 'Bearer ' + apiKey.trim());
-    xhr.timeout = 25000;
-
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          var res = JSON.parse(xhr.responseText);
-          var reply = res.choices[0].message.content;
-          callback(null, reply);
-        } catch (e) {
-          callback(e);
-        }
-      } else {
-        callback(new Error('OpenAI HTTP ' + xhr.status));
-      }
+        var res = JSON.parse(xhr.responseText);
+        callback(null, res.choices[0].message.content);
+      } else { callback(new Error('API error')); }
     };
-
-    xhr.onerror = xhr.ontimeout = function () {
-      callback(new Error('OpenAI Network Error'));
-    };
-
     xhr.send(JSON.stringify(payload));
   }
 
@@ -348,10 +215,7 @@
     sending = true;
 
     var inp = document.getElementById('chat-input');
-    if (inp) {
-      inp.value = '';
-      inp.style.height = 'auto';
-    }
+    if (inp) { inp.value = ''; inp.style.height = 'auto'; }
 
     addMsg('user', text);
     showTyping();
@@ -363,63 +227,31 @@
       hideTyping();
       addMsg('assistant', replyText);
       sending = false;
-      checkCrisis(text);
     }
 
-    // 1. Matematik tezkor hisob-kitob (3-2, 5*5, 100/4...)
     var mathRes = trySolveMath(text);
-    if (mathRes) {
-      setTimeout(function () {
-        finish(mathRes);
-      }, 300);
-      return;
-    }
+    if (mathRes) { setTimeout(function () { finish(mathRes); }, 300); return; }
 
-    function fallbackPuterOrLocal() {
-      // 3. Bepul Jonli ChatGPT (Puter.js orqali)
+    function fallbackPuterOrSmart() {
       callPuterAI(text, function (err, reply) {
-        if (!err && reply) {
-          finish(reply);
-        } else {
-          // 4. Offline aqlli kognitiv CBT modeli
-          var delay = 450 + Math.floor(Math.random() * 300);
-          setTimeout(function () {
-            finish(getLocalCBTReply(text));
-          }, delay);
+        if (!err && reply) { finish(reply); } else {
+          setTimeout(function () { finish(getSmartChatGPTReply(text)); }, 400);
         }
       });
     }
 
-    // 2. Foydalanuvchi kiritgan shaxsiy API kalit (agar mavjud bo'lsa)
     if (apiKey) {
       if (provider === 'gemini') {
         callGemini(apiKey, text, function (err, reply) {
-          if (!err && reply) {
-            finish(reply);
-          } else {
-            fallbackPuterOrLocal();
-          }
+          if (!err && reply) finish(reply); else fallbackPuterOrSmart();
         });
       } else {
         callOpenAI(apiKey, provider, text, function (err, reply) {
-          if (!err && reply) {
-            finish(reply);
-          } else {
-            fallbackPuterOrLocal();
-          }
+          if (!err && reply) finish(reply); else fallbackPuterOrSmart();
         });
       }
     } else {
-      fallbackPuterOrLocal();
-    }
-  }
-
-  function checkCrisis(text) {
-    var t = text.toLowerCase();
-    if (['o\'lim', 'suicid', 'zarar', 'yashashni'].some(function (w) { return t.indexOf(w) !== -1; })) {
-      setTimeout(function () {
-        if (window.YMWSos) window.YMWSos.open();
-      }, 1200);
+      fallbackPuterOrSmart();
     }
   }
 
@@ -430,56 +262,41 @@
     history = [];
     defIdx = 0;
     setTimeout(function () {
-      addMsg(
-        'assistant',
-        "Assalomu alaykum! 🌿 Men Youth Mental Wellness **AI CBT Companion** suhbatdoshingizman.\n\n" +
-        "Kognitiv-xulq-atvor psixologiyasi tamoyillari orqali stress, imtihon, o'ziga ishonch, overthinking yoki ruhiy charchoqni tahlil qilishga yordam beraman.\n\n" +
-        "Hozir sizni nima bezovta qilyapti? O'zingizni bemalol ifoda eting."
-      );
+      addMsg('assistant', "Assalomu alaykum! Men sizning universal ChatGPT sun'iy intellekt yordamchingizman.\n\nMenga istalgan mavzuda savol berishingiz, fikr almashishingiz, maslahat olishingiz yoki erkin suhbatlashishingiz mumkin.\n\nBugun sizga qanday yordam bera olaman?");
     }, 150);
   }
 
-  /* ═══ 6. API KALITI SOZLAMALARI UI ═══ */
   function updateBadge() {
     var badge = document.getElementById('ai-api-status-badge');
     if (!badge) return;
     var apiKey = (localStorage.getItem(STORAGE_KEY) || '').trim();
     var provider = localStorage.getItem(STORAGE_PROVIDER) || 'gemini';
-
     if (apiKey) {
       var pName = provider === 'gemini' ? 'Gemini' : provider === 'groq' ? 'Groq' : 'OpenAI';
-      badge.textContent = '🟢 ' + pName + ' Ulangan';
+      badge.textContent = 'API Ulangan (' + pName + ')';
+      badge.style.color = '#10b981';
     } else {
-      badge.textContent = '⚙️ API Kaliti (CBT Faol)';
+      badge.textContent = 'ChatGPT Rejimi';
+      badge.style.color = 'var(--accent-blue)';
     }
   }
 
-  function initApiKeySettings() {
+  function initAPIKeyPanel() {
     var toggleBtn = document.getElementById('ai-settings-toggle-btn');
     var panel = document.getElementById('ai-api-config-panel');
     var closeBtn = document.getElementById('ai-api-config-close');
     var saveBtn = document.getElementById('ai-api-key-save-btn');
-    var keyInput = document.getElementById('ai-api-key-input');
-    var provSelect = document.getElementById('ai-provider-select');
+    var input = document.getElementById('ai-api-key-input');
+    var providerSelect = document.getElementById('ai-provider-select');
     var statusEl = document.getElementById('ai-api-key-status');
 
     if (!toggleBtn || !panel) return;
-
-    var savedKey = localStorage.getItem(STORAGE_KEY) || '';
-    var savedProv = localStorage.getItem(STORAGE_PROVIDER) || 'gemini';
-
-    if (keyInput) keyInput.value = savedKey;
-    if (provSelect) provSelect.value = savedProv;
+    if (input) input.value = localStorage.getItem(STORAGE_KEY) || '';
+    if (providerSelect) providerSelect.value = localStorage.getItem(STORAGE_PROVIDER) || 'gemini';
     updateBadge();
 
     toggleBtn.addEventListener('click', function () {
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-      if (panel.style.display === 'block') {
-        if (keyInput) keyInput.focus();
-        if (window.lucide) lucide.createIcons();
-      }
-    });
-
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
         panel.style.display = 'none';
@@ -546,5 +363,12 @@
       });
     });
   });
+
+  window.initAIChat = function () {
+    var c = document.getElementById('chat-messages');
+    if (!c || c.children.length === 0) {
+      welcome();
+    }
+  };
 })();
 
