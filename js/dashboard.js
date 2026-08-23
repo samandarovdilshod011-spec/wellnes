@@ -4,11 +4,11 @@
  */
 
 const MOOD_LABELS = {
-  great:       'A’lo 🤩',
-  good:        'Yaxshi 🙂',
-  okay:        'O‘rtacha 😐',
-  stressed:    'Stressda 😫',
-  overwhelmed: 'Charchagan 😵‍💫'
+  great:       'A’lo',
+  good:        'Yaxshi',
+  okay:        'O‘rtacha',
+  stressed:    'Stressda',
+  overwhelmed: 'Charchagan'
 };
 
 const MOOD_VALUES = {
@@ -59,8 +59,8 @@ function updateDashboardCards() {
       : 'Hissiyotni qayd qilish uchun bosing';
   }
   if (todayChipMood) {
-    const emojis = { great: '🤩', good: '🙂', okay: '😐', stressed: '😫', overwhelmed: '😵‍💫' };
-    todayChipMood.textContent = checkin ? (emojis[checkin.mood] || '✨') : '➕';
+    const scores = { great: '5.0', good: '4.0', okay: '3.0', stressed: '2.0', overwhelmed: '1.0' };
+    todayChipMood.textContent = checkin ? (scores[checkin.mood] || '3.5') : '—';
   }
 
   // Balance card — derived from mood score

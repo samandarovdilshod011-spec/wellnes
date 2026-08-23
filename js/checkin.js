@@ -9,11 +9,11 @@
   let selectedFactors = [];
 
   const MOOD_LABELS = {
-    great:       'A’lo 🤩',
-    good:        'Yaxshi 🙂',
-    okay:        'O‘rtacha 😐',
-    stressed:    'Stressda 😫',
-    overwhelmed: 'Charchagan 😵‍💫'
+    great:       'A’lo',
+    good:        'Yaxshi',
+    okay:        'O‘rtacha',
+    stressed:    'Stressda',
+    overwhelmed: 'Charchagan'
   };
 
   const MOOD_MESSAGES = {
