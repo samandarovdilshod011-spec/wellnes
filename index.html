@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<link rel="stylesheet" href="css/variables.css?v=3.0">
-<link rel="stylesheet" href="css/base.css?v=3.0">
-<link rel="stylesheet" href="css/layout.css?v=3.0">
-<link rel="stylesheet" href="css/components.css?v=3.0">
-<link rel="stylesheet" href="css/sections.css?v=3.0">
-<link rel="stylesheet" href="css/animations.css?v=3.0">
+<link rel="stylesheet" href="css/variables.css?v=3.2">
+<link rel="stylesheet" href="css/base.css?v=3.2">
+<link rel="stylesheet" href="css/layout.css?v=3.2">
+<link rel="stylesheet" href="css/components.css?v=3.2">
+<link rel="stylesheet" href="css/sections.css?v=3.2">
+<link rel="stylesheet" href="css/animations.css?v=3.2">
 </head>
 <body>
 <canvas id="particles-canvas"></canvas>
@@ -153,41 +153,191 @@
 
 <!-- VIEW: OVERVIEW -->
 <div class="app-view active" id="view-overview">
-<div class="overview-header">
-<p class="view-eyebrow">Asosiy Panel</p>
-<h1 class="overview-greeting-title">Xayrli <span id="time-greeting">kun</span>, <span id="greeting-name" class="gradient-text">Do'stim</span>.</h1>
-<p class="overview-subtitle">Bugungi ruhiy salomatlik makoningiz.</p>
+
+<!-- HERO GREETING BANNER -->
+<div class="overview-hero-card glass-panel">
+  <div class="overview-hero-left">
+    <div class="overview-hero-eyebrow">
+      <span class="hero-live-dot"></span>
+      <span>SHAXSIY RUHIY MAKON</span>
+      <span class="hero-date-pill" id="hero-live-date">Bugun, 23-Avgust</span>
+    </div>
+    <h1 class="overview-hero-title">
+      Xayrli <span id="time-greeting">kun</span>, <span id="greeting-name" class="gradient-text">Do'stim</span> 👋
+    </h1>
+    <p class="overview-hero-quote">
+      "Har bir yangi kun — yangi imkoniyat va ichki xotirjamlik sari bir qadam."
+    </p>
+    <div class="overview-hero-actions">
+      <button class="btn btn-primary btn-sm hero-checkin-btn" data-nav-to="checkin">
+        <i data-lucide="smile" width="16" height="16"></i>
+        Bugungi kayfiyatni belgilash
+      </button>
+      <button class="btn btn-secondary btn-sm hero-ai-btn" data-nav-to="ai">
+        <i data-lucide="bot" width="16" height="16"></i>
+        AI Maslahatchi
+      </button>
+    </div>
+  </div>
+  
+  <div class="overview-hero-right">
+    <div class="hero-stat-pill">
+      <span class="hero-stat-icon">🔥</span>
+      <div>
+        <div class="hero-stat-val">5 Kun</div>
+        <div class="hero-stat-lbl">Ketma-ketlik</div>
+      </div>
+    </div>
+    <div class="hero-stat-pill">
+      <span class="hero-stat-icon">🛡️</span>
+      <div>
+        <div class="hero-stat-val">100% Maxfiy</div>
+        <div class="hero-stat-lbl">Faqat qurilmada</div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- 3 BENTO SUMMARY CARDS -->
 <div class="overview-top-grid">
-<div class="overview-summary-card">
-<span class="summary-card-label">Bugungi Kayfiyat</span>
-<div class="summary-card-val"><i data-lucide="smile" width="22" height="22" style="color:var(--accent-blue)"></i><span id="dash-mood-text">Kutilmoqda</span></div>
-<span class="summary-card-sub" id="dash-mood-sub">Bugun kayfiyatingiz so'raladi</span>
+  <!-- Card 1: Kayfiyat -->
+  <div class="overview-summary-card glass-panel" data-nav-to="checkin" role="button" tabindex="0">
+    <div class="summary-card-header">
+      <span class="summary-card-label">
+        <i data-lucide="heart" width="14" height="14" style="color:var(--accent-rose)"></i>
+        Bugungi Kayfiyat
+      </span>
+      <span class="summary-badge-link">O'zgartirish ↗</span>
+    </div>
+    <div class="summary-card-val">
+      <div class="summary-icon-halo mood-halo">
+        <i data-lucide="smile" width="22" height="22" style="color:#60a5fa"></i>
+      </div>
+      <span id="dash-mood-text">Kutilmoqda</span>
+    </div>
+    <div class="summary-card-footer">
+      <span class="summary-card-sub" id="dash-mood-sub">Hissiyotni qayd qilish uchun bosing</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Balans -->
+  <div class="overview-summary-card glass-panel" data-nav-to="cosmos" role="button" tabindex="0">
+    <div class="summary-card-header">
+      <span class="summary-card-label">
+        <i data-lucide="activity" width="14" height="14" style="color:var(--accent-cyan)"></i>
+        Ruhiy Energiya
+      </span>
+      <span class="summary-badge-link">Mashq qilish ↗</span>
+    </div>
+    <div class="summary-card-val">
+      <div class="summary-icon-halo energy-halo">
+        <i data-lucide="zap" width="22" height="22" style="color:var(--accent-amber)"></i>
+      </div>
+      <span id="dash-balance-text">Muvozanatda</span>
+    </div>
+    <div class="balance-bar-wrap">
+      <div class="balance-bar" id="dash-balance-bar" style="width:78%"></div>
+    </div>
+  </div>
+
+  <!-- Card 3: Ruhiy Maydon / Reja -->
+  <div class="overview-summary-card glass-panel" data-nav-to="cosmos" role="button" tabindex="0">
+    <div class="summary-card-header">
+      <span class="summary-card-label">
+        <i data-lucide="sparkles" width="14" height="14" style="color:var(--success)"></i>
+        Ruhiy Maydon
+      </span>
+      <span class="summary-badge-link">Ochish ↗</span>
+    </div>
+    <div class="summary-card-val">
+      <div class="summary-icon-halo cosmos-halo">
+        <i data-lucide="compass" width="22" height="22" style="color:var(--accent-violet)"></i>
+      </div>
+      <span id="dash-plan-text">Nafas & Musiqa</span>
+    </div>
+    <div class="summary-card-footer">
+      <span class="summary-card-sub" id="dash-plan-sub">Ruhiy Maydonga o'ting</span>
+    </div>
+  </div>
 </div>
-<div class="overview-summary-card">
-<span class="summary-card-label">Kunlik Balans</span>
-<div class="summary-card-val"><i data-lucide="bar-chart-2" width="22" height="22" style="color:var(--accent-violet)"></i><span id="dash-balance-text">Muvozanatda</span></div>
-<div class="balance-bar-wrap"><div class="balance-bar" id="dash-balance-bar" style="width:78%"></div></div>
+
+<!-- HAFTALIK KAYFIYAT GRAFIK CARD -->
+<div class="your-week-card glass-panel">
+  <div class="your-week-header">
+    <div>
+      <h2 class="your-week-title">Haftalik Kayfiyat Dinamikasi</h2>
+      <p style="font-size:0.82rem;color:var(--text-tertiary);margin-top:2px">Oxirgi 7 kunlik hissiyotlar tahlili</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="badge" style="background:rgba(59,130,246,0.12);color:#60a5fa;border-color:rgba(59,130,246,0.3)">
+        ● Jonli tahlil
+      </span>
+    </div>
+  </div>
+  
+  <!-- Week day pills -->
+  <div class="week-days-strip" id="week-days-strip">
+    <div class="day-chip"><span class="day-name">Du</span><span class="day-mood">😊</span></div>
+    <div class="day-chip"><span class="day-name">Se</span><span class="day-mood">🙂</span></div>
+    <div class="day-chip"><span class="day-name">Chor</span><span class="day-mood">😐</span></div>
+    <div class="day-chip"><span class="day-name">Pay</span><span class="day-mood">😫</span></div>
+    <div class="day-chip"><span class="day-name">Jum</span><span class="day-mood">🤩</span></div>
+    <div class="day-chip"><span class="day-name">Shan</span><span class="day-mood">✨</span></div>
+    <div class="day-chip active-today"><span class="day-name">Bugun</span><span class="day-mood" id="today-chip-mood">😵‍💫</span></div>
+  </div>
+
+  <div class="your-week-chart-box">
+    <canvas id="weekly-chart-canvas"></canvas>
+  </div>
+  <div class="your-week-footer-note">
+    <span>💡 Ruhiy salomatlik har kuni o'zgarishi normal holat. Asosiysi, o'zingizni tinglash!</span>
+  </div>
 </div>
-<div class="overview-summary-card">
-<span class="summary-card-label">Ruhiy Maydon</span>
-<div class="summary-card-val"><i data-lucide="sparkles" width="22" height="22" style="color:var(--success)"></i><span id="dash-plan-text">Nafas & Musiqa</span></div>
-<span class="summary-card-sub" id="dash-plan-sub">Ruhiy Maydonga o'ting</span>
-</div>
-</div>
-<div class="your-week-card">
-<div class="your-week-header"><h2 class="your-week-title">Haftalik Kayfiyat</h2><span class="badge">Shaxsiy</span></div>
-<div class="your-week-chart-box"><canvas id="weekly-chart-canvas"></canvas></div>
-<p class="your-week-footer-note">Qaydlar shaxsiy dinamikangizni ko'rsatadi.</p>
-</div>
-<div>
-<h3 class="quick-actions-section-title">Tezkor Amallar</h3>
-<div class="quick-actions-grid">
-<div class="quick-action-card" data-action-nav="resources"><div class="quick-action-icon-box"><i data-lucide="search" width="22" height="22"></i></div><div><div class="quick-action-title">Resurslar</div><div class="quick-action-desc">Amaliy qo'llanmalar</div></div></div>
-<div class="quick-action-card" data-action-nav="ai"><div class="quick-action-icon-box"><i data-lucide="bot" width="22" height="22"></i></div><div><div class="quick-action-title">AI Yordamchi</div><div class="quick-action-desc">Maslahat va motivatsiya</div></div></div>
-<div class="quick-action-card" data-action-nav="videos"><div class="quick-action-icon-box"><i data-lucide="play-circle" width="22" height="22"></i></div><div><div class="quick-action-title">Videolar</div><div class="quick-action-desc">Kayfiyatga mos YouTube</div></div></div>
-<div class="quick-action-card" data-action-nav="support"><div class="quick-action-icon-box"><i data-lucide="heart-handshake" width="22" height="22"></i></div><div><div class="quick-action-title">Yordam</div><div class="quick-action-desc">Ishonchli qo'llab-quvvatlash</div></div></div>
-</div>
+
+<!-- TEZKOR AMALLAR -->
+<div style="margin-top:36px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <h3 class="quick-actions-section-title" style="margin-bottom:0">Tezkor Amallar & Bo'limlar</h3>
+    <span style="font-size:0.78rem;color:var(--text-tertiary)">Barchasi 1 bosishda</span>
+  </div>
+  <div class="quick-actions-grid">
+    <div class="quick-action-card glass-panel" data-action-nav="resources">
+      <div class="quick-action-icon-box" style="color:#38bdf8;border-color:rgba(56,189,248,0.2)">
+        <i data-lucide="book-open" width="22" height="22"></i>
+      </div>
+      <div>
+        <div class="quick-action-title">Resurslar Kutubxonasi</div>
+        <div class="quick-action-desc">Foydali maqolalar, audio va mashqlar</div>
+      </div>
+    </div>
+    <div class="quick-action-card glass-panel" data-action-nav="ai">
+      <div class="quick-action-icon-box" style="color:#a855f7;border-color:rgba(168,85,247,0.2)">
+        <i data-lucide="bot" width="22" height="22"></i>
+      </div>
+      <div>
+        <div class="quick-action-title">ChatGPT AI Yordamchi</div>
+        <div class="quick-action-desc">Savol bering, xolis maslahat oling</div>
+      </div>
+    </div>
+    <div class="quick-action-card glass-panel" data-action-nav="videos">
+      <div class="quick-action-icon-box" style="color:#f43f5e;border-color:rgba(244,63,94,0.2)">
+        <i data-lucide="play-circle" width="22" height="22"></i>
+      </div>
+      <div>
+        <div class="quick-action-title">Video Kurator</div>
+        <div class="quick-action-desc">Kayfiyatingizga mos YouTube videolar</div>
+      </div>
+    </div>
+    <div class="quick-action-card glass-panel" data-action-nav="cosmos">
+      <div class="quick-action-icon-box" style="color:#34d399;border-color:rgba(52,211,153,0.2)">
+        <i data-lucide="sparkles" width="22" height="22"></i>
+      </div>
+      <div>
+        <div class="quick-action-title">Ruhiy Maydon</div>
+        <div class="quick-action-desc">2 daqiqalik tinchlantiruvchi nafas</div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- VIDEO CURATOR — Asosiy panelda ham ko'rsatiladi -->
 <div class="mvc-section">
@@ -588,15 +738,15 @@ Koinosga Yuborish
 <div id="toast-container" class="toast-container"></div>
 
 <script src="https://js.puter.com/v2/"></script>
-<script src="js/storage.js?v=3.0"></script>
-<script src="js/auth.js?v=3.0"></script>
-<script src="js/app.js?v=3.0"></script>
-<script src="js/checkin.js?v=3.0"></script>
-<script src="js/dashboard.js?v=3.0"></script>
-<script src="js/resources.js?v=3.0"></script>
-<script src="js/ai-assistant.js?v=3.0"></script>
-<script src="js/reset.js?v=3.0"></script>
-<script src="js/video-curator.js?v=3.0"></script>
-<script src="js/cosmos-reset.js?v=3.0"></script>
+<script src="js/storage.js?v=3.2"></script>
+<script src="js/auth.js?v=3.2"></script>
+<script src="js/app.js?v=3.2"></script>
+<script src="js/checkin.js?v=3.2"></script>
+<script src="js/dashboard.js?v=3.2"></script>
+<script src="js/resources.js?v=3.2"></script>
+<script src="js/ai-assistant.js?v=3.2"></script>
+<script src="js/reset.js?v=3.2"></script>
+<script src="js/video-curator.js?v=3.2"></script>
+<script src="js/cosmos-reset.js?v=3.2"></script>
 </body>
 </html>

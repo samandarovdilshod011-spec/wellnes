@@ -492,7 +492,170 @@ select {
   font-size: 1rem;
 }
 
-/* ── Top 3-card row ─────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   OVERVIEW HERO CARD & BENTO DASHBOARD
+   ══════════════════════════════════════════════════════════════ */
+.overview-hero-card {
+  background: linear-gradient(135deg, rgba(16, 24, 48, 0.85) 0%, rgba(12, 18, 36, 0.9) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.28);
+  border-radius: var(--radius-xl);
+  padding: 34px 38px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.overview-hero-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.overview-hero-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.overview-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #60a5fa;
+  margin-bottom: 12px;
+}
+
+.hero-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 12px #10b981;
+  animation: dot-pulse 2s infinite;
+}
+
+.hero-date-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.overview-hero-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.overview-hero-quote {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 22px;
+  max-width: 600px;
+  font-style: italic;
+}
+
+.overview-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-checkin-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-checkin-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.7);
+}
+
+.hero-ai-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.22s ease;
+}
+
+.hero-ai-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.overview-hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hero-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  min-width: 175px;
+}
+
+.hero-stat-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.hero-stat-val {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.hero-stat-lbl {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* ── Top 3 Bento Cards ─────────────────────────────────────────────────── */
 .overview-top-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -500,7 +663,6 @@ select {
   margin-bottom: 28px;
 }
 
-/* ── Overview Summary Cards ────────────────────────────────────────────── */
 .overview-summary-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -511,10 +673,11 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 136px;
+  min-height: 155px;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .overview-summary-card::before {
@@ -524,19 +687,26 @@ select {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .overview-summary-card:hover {
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(99, 102, 241, 0.45);
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(99, 102, 241, 0.18);
 }
 
 .overview-summary-card:hover::before {
   opacity: 1;
+}
+
+.summary-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .summary-card-label {
@@ -545,26 +715,109 @@ select {
   letter-spacing: 0.1em;
   color: var(--text-tertiary);
   font-weight: 700;
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+.summary-badge-link {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #60a5fa;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.overview-summary-card:hover .summary-badge-link {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
 .summary-card-val {
-  font-size: 1.7rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  letter-spacing: -0.5px;
+  gap: 14px;
+  margin-bottom: 12px;
+  letter-spacing: -0.4px;
+}
+
+.summary-icon-halo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.overview-summary-card:hover .summary-icon-halo {
+  transform: scale(1.08);
+}
+
+.summary-card-footer {
+  margin-top: auto;
 }
 
 .summary-card-sub {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
+}
+
+/* ── Week Days Strip ────────────────────────────────────────────────────── */
+.week-days-strip {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.day-chip {
+  flex: 1;
+  min-width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.day-chip:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.day-chip.active-today {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(139, 92, 246, 0.16));
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.day-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.day-chip.active-today .day-name {
+  color: #60a5fa;
+}
+
+.day-mood {
+  font-size: 1.3rem;
+  line-height: 1;
 }
 
 /* ── Weekly chart card ──────────────────────────────────────────────────── */
