@@ -298,6 +298,8 @@ const MindCareApp = (() => {
   };
 })();
 
+window.MindCareApp = MindCareApp;
+
 /* ─── Bootstrap ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
 

@@ -87,13 +87,14 @@
       actionsEl.innerHTML = '';
 
       const actions = [
-        { label: 'Kuningizni rejalashtiring', view: 'planner',   style: 'btn-primary' },
-        { label: 'Qisqa tanaffus oling',      view: 'reset',     style: 'btn-secondary' },
-        { label: 'Resurslarni ko‘rish',       view: 'resources', style: 'btn-secondary' }
+        { label: 'Ruhiy Maydon (Nafas & Musiqa)', view: 'ruhiy',     style: 'btn-primary' },
+        { label: 'Kayfiyatga mos Videolar',      view: 'videos',    style: 'btn-secondary' },
+        { label: 'AI Maslahatchi bilan suhbat',  view: 'ai',        style: 'btn-secondary' },
+        { label: 'Foydali Resurslar',            view: 'resources', style: 'btn-secondary' }
       ];
 
       if (mood === 'stressed' || mood === 'overwhelmed') {
-        actions.push({ label: 'Yordam markazi', view: 'support', style: 'btn-secondary' });
+        actions.push({ label: 'Yordam Markazi (Mutaxassis)', view: 'support', style: 'btn-secondary' });
       }
 
       actions.forEach(a => {
@@ -102,7 +103,9 @@
         btn.setAttribute('data-nav-to', a.view);
         btn.innerHTML = a.label;
         btn.addEventListener('click', () => {
-          if (window.MindCareApp) window.MindCareApp.navigateTo(a.view);
+          if (window.MindCareApp) {
+            window.MindCareApp.navigateTo(a.view);
+          }
         });
         actionsEl.appendChild(btn);
       });
@@ -110,14 +113,18 @@
       // Re-do button
       const redoBtn = document.createElement('button');
       redoBtn.className = 'btn btn-ghost btn-sm';
-      redoBtn.style.marginTop = '8px';
-      redoBtn.textContent = '↺ Qayta belgilash';
+      redoBtn.style.marginTop = '10px';
+      redoBtn.textContent = 'Qayta belgilash';
       redoBtn.addEventListener('click', () => {
         selectedMood    = null;
         selectedFactors = [];
         document.querySelectorAll('.mood-option').forEach(o => o.classList.remove('selected'));
         document.querySelectorAll('.factor-tag').forEach(t  => t.classList.remove('selected'));
-        if (nextBtn) nextBtn.style.display = 'inline-flex';
+        if (nextBtn) {
+          nextBtn.style.display = 'inline-flex';
+          nextBtn.innerHTML = 'Davom etish <i data-lucide="arrow-right" width="16" height="16"></i>';
+        }
+        if (backBtn) backBtn.style.visibility = 'hidden';
         goToStep(1);
       });
       actionsEl.appendChild(redoBtn);
