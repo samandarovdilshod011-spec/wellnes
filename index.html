@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Mental Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+<!-- ═══ AUTH ═══ -->
+<div id="auth-screen" class="screen-container">
+<div class="auth-bg-glow"></div>
+<div class="auth-card glass-panel">
+<div class="auth-logo-area">
+<div class="auth-logo-badge">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+<path d="M14 2C7.373 2 2 7.373 2 14s5.373 12 12 12 12-5.373 12-12S20.627 2 14 2z" fill="url(#lg1)"/>
+<path d="M9 11c0-2.761 2.239-5 5-5s5 2.239 5 5c0 1.5-.664 2.848-1.716 3.773L16 18H12l-.284-3.227A4.993 4.993 0 0 1 9 11z" fill="rgba(255,255,255,0.9)"/>
+<rect x="11" y="19" width="6" height="2" rx="1" fill="rgba(255,255,255,0.9)"/>
+<defs><linearGradient id="lg1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+</svg>
+</div>
+<h1 class="auth-title">Youth Mental <span class="gradient-text">Wellness</span></h1>
+<p class="auth-subtitle">Ruhiy salomatlik uchun shaxsiy makoningiz.</p>
+</div>
+<form id="register-form" class="auth-form" autocomplete="off">
+<div class="auth-field"><label for="reg-name">To'liq ismingiz</label><input type="text" id="reg-name" placeholder="Ismingiz" autocomplete="name" required></div>
+<div class="auth-field"><label for="reg-email">Email</label><input type="email" id="reg-email" placeholder="siz@email.com" autocomplete="email" required></div>
+<div class="auth-field"><label for="reg-password">Parol</label>
+<div class="password-field-wrap">
+<input type="password" id="reg-password" placeholder="Parol yarating" autocomplete="new-password" required>
+<button type="button" class="password-toggle" data-target="reg-password"><i data-lucide="eye" width="18" height="18"></i></button>
+</div></div>
+<button type="submit" class="btn btn-primary btn-auth" id="register-btn">Boshlash <i data-lucide="arrow-right" width="18" height="18"></i></button>
+<p class="auth-disclaimer">Ma'lumotlaringiz qurilmangizda xavfsiz saqlanadi.</p>
+</form>
+</div>
+</div>
+
+<!-- ═══ ONBOARDING — kayfiyat birinchi ═══ -->
+<div id="onboarding-screen" class="screen-container">
+<div class="auth-bg-glow"></div>
+<div class="auth-card onboarding-card glass-panel">
+<div class="onboarding-progress-dots">
+<div class="onboarding-dot active" data-dot="1"></div>
+<div class="onboarding-dot" data-dot="2"></div>
+<div class="onboarding-dot" data-dot="3"></div>
+</div>
+<div class="onboarding-steps">
+<!-- Step 1: xush kelibsiz -->
+<div class="onboarding-step active" data-step="1">
+<h2 class="onboarding-title">Xush kelibsiz, <span id="onboarding-name" class="gradient-text">Do'stim</span>.</h2>
+<p class="onboarding-desc">Bu yerda his-tuyg'ularingiz xavfsiz. Har kuni bir necha daqiqa o'zingizga ajrating.</p>
+<div class="onboarding-nav"><button class="btn btn-primary onboarding-next-btn">Davom etish <i data-lucide="arrow-right" width="16" height="16"></i></button></div>
+</div>
+<!-- Step 2: KAYFIYAT — har kirishda -->
+<div class="onboarding-step" data-step="2">
+<h2 class="onboarding-title">Hozir o'zingizni qanday his qilyapsiz?</h2>
+<p class="onboarding-desc">Hech qanday to'g'ri yoki noto'g'ri javob yo'q.</p>
+<div class="onboarding-mood-row">
+<button type="button" class="onboarding-mood-btn" data-mood="great"><span>🤩</span><span>A'lo</span></button>
+<button type="button" class="onboarding-mood-btn" data-mood="good"><span>🙂</span><span>Yaxshi</span></button>
+<button type="button" class="onboarding-mood-btn" data-mood="okay"><span>😐</span><span>O'rtacha</span></button>
+<button type="button" class="onboarding-mood-btn" data-mood="stressed"><span>😫</span><span>Stressda</span></button>
+<button type="button" class="onboarding-mood-btn" data-mood="overwhelmed"><span>😵</span><span>Charchagan</span></button>
+</div>
+<div class="onboarding-nav">
+<button class="btn btn-ghost onboarding-back-btn"><i data-lucide="arrow-left" width="16" height="16"></i> Ortga</button>
+<button class="btn btn-primary onboarding-next-btn">Davom etish <i data-lucide="arrow-right" width="16" height="16"></i></button>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="onboarding-step" data-step="3">
+<h2 class="onboarding-title">Nimalarga e'tibor bermoqchisiz?</h2>
+<p class="onboarding-desc">Bir yoki bir nechta tanlang.</p>
+<div class="onboarding-options">
+<button class="onboarding-opt-btn" data-focus="stress"><i data-lucide="wind" width="18" height="18"></i> Stressni boshqarish</button>
+<button class="onboarding-opt-btn" data-focus="planning"><i data-lucide="calendar" width="18" height="18"></i> Kun rejasi</button>
+<button class="onboarding-opt-btn" data-focus="resources"><i data-lucide="book-open" width="18" height="18"></i> Foydali resurslar</button>
+<button class="onboarding-opt-btn" data-focus="routines"><i data-lucide="repeat" width="18" height="18"></i> Sog'lom odatlar</button>
+<button class="onboarding-opt-btn" data-focus="support"><i data-lucide="heart" width="18" height="18"></i> Yordam olish</button>
+</div>
+<div class="onboarding-nav">
+<button class="btn btn-ghost onboarding-back-btn"><i data-lucide="arrow-left" width="16" height="16"></i> Ortga</button>
+<button class="btn btn-primary" id="enter-mindcare-btn">Platformaga kirish <i data-lucide="arrow-right" width="16" height="16"></i></button>
+</div>
+<button class="skip-link" id="skip-onboarding">O'tkazib yuborish</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div id="app-screen" class="screen-container">
+<header class="mobile-header">
+<button class="mobile-menu-btn" id="mobile-menu-toggle"><i data-lucide="menu" width="22" height="22"></i></button>
+<div class="mobile-brand">Youth Mental Wellness</div>
+<div style="width:40px"></div>
+</header>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-top">
+<div class="sidebar-brand">
+<div class="sidebar-logo">
+<svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+<path d="M14 2C7.373 2 2 7.373 2 14s5.373 12 12 12 12-5.373 12-12S20.627 2 14 2z" fill="white"/>
+<path d="M9 11c0-2.761 2.239-5 5-5s5 2.239 5 5c0 1.5-.664 2.848-1.716 3.773L16 18H12l-.284-3.227A4.993 4.993 0 0 1 9 11z" fill="url(#sbG)"/>
+<rect x="11" y="19" width="6" height="2" rx="1" fill="url(#sbG)"/>
+<defs><linearGradient id="sbG" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+</svg>
+</div>
+<div class="sidebar-brand-text">
+<span class="sidebar-brand-title">Youth Mental Wellness</span>
+<span class="sidebar-brand-subtitle">Ruhiyatingiz muhim.</span>
+</div>
+</div>
+<nav class="sidebar-nav" id="sidebar-nav">
+<a class="sidebar-nav-item active" data-view="overview" href="#" role="button"><i data-lucide="layout-dashboard" width="20" height="20"></i><span>Asosiy panel</span></a>
+<a class="sidebar-nav-item" data-view="videos" href="#" role="button"><i data-lucide="play-circle" width="20" height="20"></i><span>Videolar</span></a>
+<a class="sidebar-nav-item" data-view="resources" href="#" role="button"><i data-lucide="book-open" width="20" height="20"></i><span>Resurslar</span></a>
+<a class="sidebar-nav-item" data-view="ai" href="#" role="button"><i data-lucide="bot" width="20" height="20"></i><span>AI Yordamchi</span></a>
+<a class="sidebar-nav-item" data-view="ruhiy" href="#" role="button"><i data-lucide="sparkles" width="20" height="20"></i><span>Ruhiy Maydon</span></a>
+<a class="sidebar-nav-item" data-view="support" href="#" role="button"><i data-lucide="heart-handshake" width="20" height="20"></i><span>Yordam markazi</span></a>
+</nav>
+</div>
+<div class="sidebar-bottom">
+<div class="sidebar-profile-card">
+<div class="sidebar-profile-info">
+<div class="profile-avatar" id="sidebar-avatar">F</div>
+<div class="profile-meta">
+<span class="profile-name" id="sidebar-username">Foydalanuvchi</span>
+<span class="profile-status">Xush kelibsiz!</span>
+</div>
+</div>
+<button class="sidebar-logout-btn" id="logout-btn" title="Chiqish"><i data-lucide="log-out" width="18" height="18"></i></button>
+</div>
+</div>
+</aside>
+
+<main class="main-content" id="main-content">
+
+<!-- VIEW: OVERVIEW -->
+<div class="app-view active" id="view-overview">
+<div class="overview-header">
+<p class="view-eyebrow">Asosiy Panel</p>
+<h1 class="overview-greeting-title">Xayrli <span id="time-greeting">kun</span>, <span id="greeting-name" class="gradient-text">Do'stim</span>.</h1>
+<p class="overview-subtitle">Bugungi ruhiy salomatlik makoningiz.</p>
+</div>
+<div class="overview-top-grid">
+<div class="overview-summary-card">
+<span class="summary-card-label">Bugungi Kayfiyat</span>
+<div class="summary-card-val"><i data-lucide="smile" width="22" height="22" style="color:var(--accent-blue)"></i><span id="dash-mood-text">Kutilmoqda</span></div>
+<span class="summary-card-sub" id="dash-mood-sub">Bugun kayfiyatingiz so'raladi</span>
+</div>
+<div class="overview-summary-card">
+<span class="summary-card-label">Kunlik Balans</span>
+<div class="summary-card-val"><i data-lucide="bar-chart-2" width="22" height="22" style="color:var(--accent-violet)"></i><span id="dash-balance-text">Muvozanatda</span></div>
+<div class="balance-bar-wrap"><div class="balance-bar" id="dash-balance-bar" style="width:78%"></div></div>
+</div>
+<div class="overview-summary-card">
+<span class="summary-card-label">Ruhiy Maydon</span>
+<div class="summary-card-val"><i data-lucide="sparkles" width="22" height="22" style="color:var(--success)"></i><span id="dash-plan-text">Nafas & Musiqa</span></div>
+<span class="summary-card-sub" id="dash-plan-sub">Ruhiy Maydonga o'ting</span>
+</div>
+</div>
+<div class="your-week-card">
+<div class="your-week-header"><h2 class="your-week-title">Haftalik Kayfiyat</h2><span class="badge">Shaxsiy</span></div>
+<div class="your-week-chart-box"><canvas id="weekly-chart-canvas"></canvas></div>
+<p class="your-week-footer-note">Qaydlar shaxsiy dinamikangizni ko'rsatadi.</p>
+</div>
+<div>
+<h3 class="quick-actions-section-title">Tezkor Amallar</h3>
+<div class="quick-actions-grid">
+<div class="quick-action-card" data-action-nav="resources"><div class="quick-action-icon-box"><i data-lucide="search" width="22" height="22"></i></div><div><div class="quick-action-title">Resurslar</div><div class="quick-action-desc">Amaliy qo'llanmalar</div></div></div>
+<div class="quick-action-card" data-action-nav="ai"><div class="quick-action-icon-box"><i data-lucide="bot" width="22" height="22"></i></div><div><div class="quick-action-title">AI Yordamchi</div><div class="quick-action-desc">Maslahat va motivatsiya</div></div></div>
+<div class="quick-action-card" data-action-nav="videos"><div class="quick-action-icon-box"><i data-lucide="play-circle" width="22" height="22"></i></div><div><div class="quick-action-title">Videolar</div><div class="quick-action-desc">Kayfiyatga mos YouTube</div></div></div>
+<div class="quick-action-card" data-action-nav="support"><div class="quick-action-icon-box"><i data-lucide="heart-handshake" width="22" height="22"></i></div><div><div class="quick-action-title">Yordam</div><div class="quick-action-desc">Ishonchli qo'llab-quvvatlash</div></div></div>
+</div>
+</div>
+<!-- VIDEO CURATOR — Asosiy panelda ham ko'rsatiladi -->
+<div class="mvc-section">
+<div class="mvc-header">
+<div><p class="view-eyebrow">Kayfiyatga mos</p><h3 class="mvc-title">Video Kurator</h3><p class="mvc-subtitle">Hissiyotingizga mos videolar</p></div>
+<div class="mvc-now-playing" id="mvc-now-playing" style="display:none"><div style="width:7px;height:7px;background:#10b981;border-radius:50%;flex-shrink:0"></div><span id="mvc-np-text">Ijro etilmoqda</span></div>
+</div>
+<div class="mvc-mood-pills">
+<button class="mvc-pill active" data-mood="exhausted"><span class="mvc-pill-emoji">😫</span><span class="mvc-pill-label">Charchaganman</span></button>
+<button class="mvc-pill" data-mood="anxious"><span class="mvc-pill-emoji">😰</span><span class="mvc-pill-label">Xavotirdaman</span></button>
+<button class="mvc-pill" data-mood="down"><span class="mvc-pill-emoji">🌧️</span><span class="mvc-pill-label">Tushkun</span></button>
+<button class="mvc-pill" data-mood="motivated"><span class="mvc-pill-emoji">⚡</span><span class="mvc-pill-label">Motivatsiya</span></button>
+<button class="mvc-pill" data-mood="balanced"><span class="mvc-pill-emoji">🌱</span><span class="mvc-pill-label">Muvozanatli</span></button>
+</div>
+<div class="mvc-mood-desc" id="mvc-mood-desc"></div>
+<div class="mvc-grid" id="mvc-grid"></div>
+<div class="mvc-more-row"><button class="mvc-more-btn" id="mvc-more-btn" style="display:none">Ko'proq videolar</button></div>
+<div class="mvc-player-wrap" id="mvc-player-wrap" style="display:none">
+<div class="mvc-player-header">
+<div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+<div class="mvc-player-title" id="mvc-player-title"></div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+<a href="#" id="mvc-yt-direct-btn" target="_blank" class="btn btn-secondary btn-sm" style="padding:6px 12px;font-size:0.75rem;border-radius:999px;color:#ef4444;border-color:rgba(239,68,68,0.3);text-decoration:none;gap:6px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+YouTube da ochish ↗
+</a>
+<button class="mvc-player-close" id="mvc-player-close" title="Yopish"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+</div>
+<div class="mvc-iframe-wrap"><iframe id="mvc-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div style="padding:9px 16px;background:rgba(0,0,0,0.5);border-top:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--text-tertiary);flex-wrap:wrap;gap:8px">
+<span>💡 Video pleerda ochilmasa, YouTube da to'g'ridan-to'g'ri ko'ring:</span>
+<a href="#" id="mvc-yt-footer-link" target="_blank" style="color:var(--accent-blue);font-weight:600;text-decoration:underline">YouTube da tomosha qilish ↗</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- VIEW: VIDEOS -->
+<div class="app-view" id="view-videos">
+<div class="view-header">
+<p class="view-eyebrow">Kayfiyatga mos</p>
+<h1 class="view-title">🎬 Videolar</h1>
+<p class="view-subtitle">Kayfiyatingizni tanlang — shunga mos O'zbek YouTube videolari ko'rsatiladi.</p>
+</div>
+<div class="mvc-section" style="margin-top:0;border-radius:var(--radius-xl)">
+<div class="mvc-header">
+<div><h3 class="mvc-title" style="font-size:1rem">Kayfiyatingizni tanlang</h3></div>
+<div class="mvc-now-playing" id="v2-now-playing" style="display:none"><div style="width:7px;height:7px;background:#10b981;border-radius:50%;flex-shrink:0"></div><span id="v2-np-text">Ijro etilmoqda</span></div>
+</div>
+<div class="mvc-mood-pills v2-pills">
+<button class="mvc-pill active" data-mood="exhausted"><span class="mvc-pill-emoji">😫</span><span class="mvc-pill-label">Charchaganman</span></button>
+<button class="mvc-pill" data-mood="anxious"><span class="mvc-pill-emoji">😰</span><span class="mvc-pill-label">Xavotirdaman</span></button>
+<button class="mvc-pill" data-mood="down"><span class="mvc-pill-emoji">🌧️</span><span class="mvc-pill-label">Tushkun</span></button>
+<button class="mvc-pill" data-mood="motivated"><span class="mvc-pill-emoji">⚡</span><span class="mvc-pill-label">Motivatsiya</span></button>
+<button class="mvc-pill" data-mood="balanced"><span class="mvc-pill-emoji">🌱</span><span class="mvc-pill-label">Muvozanatli</span></button>
+</div>
+<div class="mvc-mood-desc" id="v2-mood-desc"></div>
+<div class="mvc-grid" id="v2-grid"></div>
+<div class="mvc-more-row"><button class="mvc-more-btn" id="v2-more-btn" style="display:none">Ko'proq videolar</button></div>
+<div class="mvc-player-wrap" id="v2-player-wrap" style="display:none">
+<div class="mvc-player-header">
+<div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+<div class="mvc-player-title" id="v2-player-title"></div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+<a href="#" id="v2-yt-direct-btn" target="_blank" class="btn btn-secondary btn-sm" style="padding:6px 12px;font-size:0.75rem;border-radius:999px;color:#ef4444;border-color:rgba(239,68,68,0.3);text-decoration:none;gap:6px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+YouTube da ochish ↗
+</a>
+<button class="mvc-player-close" id="v2-player-close" title="Yopish"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+</div>
+<div class="mvc-iframe-wrap"><iframe id="v2-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div style="padding:9px 16px;background:rgba(0,0,0,0.5);border-top:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--text-tertiary);flex-wrap:wrap;gap:8px">
+<span>💡 Video pleerda ochilmasa, YouTube da to'g'ridan-to'g'ri ko'ring:</span>
+<a href="#" id="v2-yt-footer-link" target="_blank" style="color:var(--accent-blue);font-weight:600;text-decoration:underline">YouTube da tomosha qilish ↗</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- VIEW: RESOURCES -->
+<div class="app-view" id="view-resources">
+<div class="view-header"><p class="view-eyebrow">Bilimlar Bazasi</p><h1 class="view-title">Foydali <span class="gradient-text">Resurslar</span></h1><p class="view-subtitle">Yoshlar ruhiy salomatligi bo'yicha qo'llanmalar.</p></div>
+<div class="resources-toolbar">
+<div style="flex:1;position:relative;display:flex;align-items:center">
+  <i data-lucide="search" width="16" height="16" class="search-icon" style="position:absolute;left:14px;color:var(--text-tertiary);pointer-events:none"></i>
+  <input type="search" id="resource-search" name="wellness-resources-search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Mavzular bo'yicha qidiring (masalan: stress, vaqt, uyqu)..." class="search-input-padded" style="width:100%;padding-right:36px">
+  <button id="resource-search-clear" style="display:none;position:absolute;right:10px;background:rgba(255,255,255,0.1);border:none;border-radius:50%;width:22px;height:22px;align-items:center;justify-content:center;color:var(--text-secondary);cursor:pointer;font-size:12px;padding:0" title="Tozalash">✕</button>
+</div>
+<div class="category-filters">
+<button class="category-btn tag active" data-category="all">Barchasi</button>
+<button class="category-btn tag" data-category="stress">Stress</button>
+<button class="category-btn tag" data-category="exam-pressure">Imtihonlar</button>
+<button class="category-btn tag" data-category="time-management">Vaqt</button>
+<button class="category-btn tag" data-category="study-habits">O'qish</button>
+<button class="category-btn tag" data-category="sleep-rest">Uyqu</button>
+<button class="category-btn tag" data-category="motivation">Motivatsiya</button>
+<button class="category-btn tag" data-category="social-pressure">Ijtimoiy</button>
+<button class="category-btn tag" data-category="confidence">Ishonch</button>
+</div>
+</div>
+<div class="resources-grid" id="resources-grid">
+<div class="resource-card card glass-panel" data-category="stress" data-id="1"><div class="resource-category badge">Stress</div><h3 class="resource-title">Ruhiy Charchoqni Yengish</h3><p class="resource-desc">Charchoq belgilarini aniqlash va quvvatni tiklash.</p><div class="resource-footer"><span class="resource-time">5 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="time-management" data-id="2"><div class="resource-category badge">Vaqt</div><h3 class="resource-title">Pomodoro Texnikasi</h3><p class="resource-desc">25 daqiqalik bloklarda diqqatni oshirish.</p><div class="resource-footer"><span class="resource-time">3 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="sleep-rest" data-id="3"><div class="resource-category badge">Uyqu</div><h3 class="resource-title">Tungi Darslarning Zarari</h3><p class="resource-desc">Uyqu eng yaxshi o'rganish quroli.</p><div class="resource-footer"><span class="resource-time">4 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="exam-pressure" data-id="4"><div class="resource-category badge">Imtihonlar</div><h3 class="resource-title">Imtihon Oldi Vahimasini Yengish</h3><p class="resource-desc">Asab tizimini tezda tinchlantirish.</p><div class="resource-footer"><span class="resource-time">6 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="social-pressure" data-id="5"><div class="resource-category badge">Ijtimoiy</div><h3 class="resource-title">Shaxsiy Chegaralar</h3><p class="resource-desc">Aybdorliksiz "yo'q" deyishni o'rganish.</p><div class="resource-footer"><span class="resource-time">4 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="confidence" data-id="6"><div class="resource-category badge">Ishonch</div><h3 class="resource-title">Imposter Sindromini Yengish</h3><p class="resource-desc">O'z kuchli tomonlaringizni anglash.</p><div class="resource-footer"><span class="resource-time">5 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="motivation" data-id="7"><div class="resource-category badge">Motivatsiya</div><h3 class="resource-title">O'z Maqsadingizni Toping</h3><p class="resource-desc">Kunlik vazifalarni katta orzular bilan bog'lash.</p><div class="resource-footer"><span class="resource-time">7 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="study-habits" data-id="8"><div class="resource-category badge">O'qish</div><h3 class="resource-title">Faol Eslash</h3><p class="resource-desc">Bilimlarni uzoq muddatli xotiraga muhrlash.</p><div class="resource-footer"><span class="resource-time">4 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+<div class="resource-card card glass-panel" data-category="stress" data-id="9"><div class="resource-category badge">Stress</div><h3 class="resource-title">Tezkor Xotirjamlik Mashqlari</h3><p class="resource-desc">5 daqiqada ongingizni hozirgi lahzaga qaytarish.</p><div class="resource-footer"><span class="resource-time">3 daqiqa</span><button class="resource-save-btn">🤍</button></div></div>
+</div>
+</div>
+
+<!-- VIEW: AI -->
+<div class="app-view" id="view-ai">
+<div class="view-header">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+<div>
+<p class="view-eyebrow">AI Ko'makchi &amp; CBT Terapiya</p>
+<h1 class="view-title">Youth Mental <span class="gradient-text">AI Companion</span></h1>
+<p class="view-subtitle">Kognitiv xulq-atvor (CBT) psixologiyasi va sun'iy intellekt asosidagi shaxsiy suhbatdoshingiz.</p>
+</div>
+<button type="button" class="btn btn-secondary btn-sm" id="ai-settings-toggle-btn" style="border-radius:999px;gap:8px">
+<i data-lucide="key" width="16" height="16"></i>
+<span id="ai-api-status-badge">API Kaliti Sozlamalari</span>
+</button>
+</div>
+</div>
+
+<!-- API KEY CONFIG PANEL -->
+<div id="ai-api-config-panel" class="glass-panel" style="display:none;margin-bottom:24px;border-color:rgba(139,92,246,0.3);background:rgba(13,18,33,0.9)">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+<h4 style="font-size:0.95rem;font-weight:700;display:flex;align-items:center;gap:8px">
+<i data-lucide="key" width="18" height="18" style="color:var(--accent-blue)"></i>
+AI API Kaliti (Google Gemini / OpenAI / Groq)
+</h4>
+<button type="button" id="ai-api-config-close" style="background:none;border:none;color:var(--text-tertiary);cursor:pointer;padding:4px"><i data-lucide="x" width="16" height="16"></i></button>
+</div>
+<p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:14px;line-height:1.5">
+Jonli sun'iy intellektga ulanish uchun <strong>Google Gemini API kalitingizni</strong> (bepul) yoki OpenAI / Groq kalitini kiriting. Kalit faqat qurilmangizda xavfsiz saqlanadi. Agar kalit kiritilmasa, tizim o'rnatilgan aqlli CBT modeli orqali ishlaydi.
+</p>
+<div style="display:grid;grid-template-columns:140px 1fr auto;gap:10px;align-items:center">
+<select id="ai-provider-select" style="font-size:0.85rem;padding:10px 12px">
+<option value="gemini">Gemini API</option>
+<option value="openai">OpenAI (ChatGPT)</option>
+<option value="groq">Groq (Llama 3)</option>
+</select>
+<input type="password" id="ai-api-key-input" placeholder="AI API kalitini kiriting (AIzaSy... yoki sk-...)" style="font-size:0.85rem;padding:10px 14px">
+<button type="button" class="btn btn-primary btn-sm" id="ai-api-key-save-btn">Saqlash</button>
+</div>
+<div id="ai-api-key-status" style="font-size:0.78rem;margin-top:8px;color:var(--text-tertiary)"></div>
+</div>
+
+<div class="ai-container">
+<div class="chat-container glass-panel">
+<div id="chat-messages" style="min-height:380px;max-height:500px;overflow-y:auto"></div>
+<div class="chat-input-area">
+<input type="text" id="chat-input" placeholder="Fikrlaringiz yoki savolingizni yozing..." autocomplete="off">
+<button id="chat-send-btn" type="button" title="Yuborish"><i data-lucide="send" width="18" height="18"></i></button>
+</div>
+</div>
+<div class="suggested-prompts">
+<button class="prompt-chip tag">🎯 O'zimga ishonch</button>
+<button class="prompt-chip tag">😰 Xavotir va stressni yengish</button>
+<button class="prompt-chip tag">💭 Overthinking (to'xtovsiz fikrlar)</button>
+<button class="prompt-chip tag">📚 Imtihonga tayyorgarlik</button>
+<button class="prompt-chip tag">🌧️ Ruhiy charchoq</button>
+<button class="prompt-chip tag">🌙 Uyqu sifatini oshirish</button>
+</div>
+<p class="ai-disclaimer">AI Kognitiv CBT psixologiyasi asosida qo'llab-quvvatlaydi. Tibbiy tashxis emas.</p>
+</div>
+</div>
+
+<!-- VIEW: RUHIY MAYDON -->
+<div class="app-view" id="view-ruhiy">
+<div class="view-header">
+<p class="view-eyebrow">Ichki Tinchlik</p>
+<h1 class="view-title">Ruhiy <span class="gradient-text">Maydon</span></h1>
+<p class="view-subtitle">Nafas oling, tinglang, his-tuyg'ularingizni koinosga yuboring.</p>
+</div>
+
+<!-- KOINOT -->
+<div class="cosmos-wrap glass-panel">
+<canvas id="cosmos-canvas"></canvas>
+<div class="cosmos-overlay">
+<div class="cosmos-title">Koinotga Sayohat</div>
+<div class="cosmos-sub">Ko'zingizni yuming va nafas oling</div>
+</div>
+</div>
+
+<!-- CATHARSIS: fikrlarni koinosga yuborish -->
+<div class="catharsis-section glass-panel">
+<h3 class="catharsis-title">💫 Og'ir fikrlarni koinosga yuboring</h3>
+<p class="catharsis-sub">Ichingizni ezayotgan narsani yozing. "Yuborish" tugmasini bosing — ular zarraga aylanib koinosga uchib ketadi.</p>
+<div class="catharsis-arena-wrap">
+<canvas id="catharsis-canvas"></canvas>
+<div class="catharsis-stars-hint" id="catharsis-hint">Yulduzlar bu yerda paydo bo'ladi...</div>
+</div>
+<div class="catharsis-input-row">
+<textarea id="catharsis-input" class="catharsis-textarea" placeholder="Bu yerga yozing... hech kim ko'rmaydi." rows="3" maxlength="400"></textarea>
+<div class="catharsis-footer">
+<span class="catharsis-char-count"><span id="cat-chars">0</span>/400</span>
+<button class="btn-catharsis" id="catharsis-btn">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+Koinosga Yuborish
+</button>
+</div>
+<div class="catharsis-status" id="catharsis-status"></div>
+</div>
+</div>
+
+<!-- AUDIO -->
+<div class="audio-section glass-panel">
+<div class="audio-header">
+<h3 class="audio-title">🎵 Tinchlantiruvchi Tovushlar</h3>
+<div class="audio-vol-row">
+<span style="font-size:.78rem;color:var(--text-tertiary)">Hajm</span>
+<input type="range" id="audio-master-vol" min="0" max="100" value="60" class="vol-range">
+<span id="audio-vol-val" style="font-size:.75rem;color:var(--text-tertiary);min-width:34px">60%</span>
+</div>
+</div>
+<div class="audio-tracks">
+<div class="audio-track" data-track="rain">
+<button class="track-play-btn" id="track-rain-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-rain" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">🌧 Yomg'ir</div><div class="track-desc">Xotirjam dam olish</div></div>
+<input type="range" class="track-vol" id="vol-rain" min="0" max="100" value="70">
+</div>
+<div class="audio-track" data-track="ocean">
+<button class="track-play-btn" id="track-ocean-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-ocean" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">🌊 Dengiz</div><div class="track-desc">Stressni eritadi</div></div>
+<input type="range" class="track-vol" id="vol-ocean" min="0" max="100" value="65">
+</div>
+<div class="audio-track" data-track="forest">
+<button class="track-play-btn" id="track-forest-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-forest" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">🌲 O'rmon</div><div class="track-desc">Tabiat qo'ynida</div></div>
+<input type="range" class="track-vol" id="vol-forest" min="0" max="100" value="60">
+</div>
+<div class="audio-track" data-track="alpha">
+<button class="track-play-btn" id="track-alpha-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-alpha" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">α Alpha</div><div class="track-desc">Binaural 10Hz Relaks</div></div>
+<input type="range" class="track-vol" id="vol-alpha" min="0" max="100" value="55">
+</div>
+<div class="audio-track" data-track="space">
+<button class="track-play-btn" id="track-space-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-space" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">🌌 Koinot</div><div class="track-desc">Chuqur meditatsiya</div></div>
+<input type="range" class="track-vol" id="vol-space" min="0" max="100" value="60">
+</div>
+<div class="audio-track" data-track="white">
+<button class="track-play-btn" id="track-white-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+<canvas class="track-canvas" id="cv-white" width="100" height="36"></canvas>
+<div class="track-info"><div class="track-name">∿ Oq Shovqin</div><div class="track-desc">Fokus uchun</div></div>
+<input type="range" class="track-vol" id="vol-white" min="0" max="100" value="50">
+</div>
+</div>
+</div>
+
+<!-- NAFAS -->
+<div class="breath-section glass-panel">
+<div class="breath-sec-header">
+<div><h3 class="breath-sec-title">🫁 Nafas Mashqi</h3><p class="breath-sec-sub">4-7-8 usuli — asab tizimini tinchlantiradi</p></div>
+<div class="breath-stats-row">
+<div class="bstat2"><span class="bstat2-val" id="bs-cycles">0</span><span class="bstat2-lbl">Sikllar</span></div>
+<div class="bstat2"><span class="bstat2-val" id="bs-time">0:00</span><span class="bstat2-lbl">Vaqt</span></div>
+</div>
+</div>
+<div class="breath-main">
+<div class="breath-canvas-wrap">
+<canvas id="breath-canvas" width="220" height="220"></canvas>
+<div class="breath-label-wrap">
+<div class="breath-phase-lbl" id="breath-phase-lbl">Boshlash uchun bosing</div>
+<div class="breath-phase-secs" id="breath-phase-secs"></div>
+</div>
+</div>
+<div class="breath-controls">
+<div class="bp-label">Naqsh tanlang</div>
+<div class="bp-options">
+<button class="bp-btn active" data-pattern="478">4-7-8</button>
+<button class="bp-btn" data-pattern="box">Box 4-4-4</button>
+<button class="bp-btn" data-pattern="simple">Oddiy 4-4</button>
+</div>
+<div class="breath-guide-steps">
+<div class="bgs active" id="bgs-inhale"><span class="bgs-secs" id="bgs-inhale-secs">4s</span><span>Nafas oling</span></div>
+<div class="bgs" id="bgs-hold"><span class="bgs-secs" id="bgs-hold-secs">7s</span><span>Ushlab turing</span></div>
+<div class="bgs" id="bgs-exhale"><span class="bgs-secs" id="bgs-exhale-secs">8s</span><span>Nafas chiqaring</span></div>
+</div>
+<button class="btn btn-primary" id="breath-main-btn" style="width:100%;margin-top:12px">▶ Boshlash</button>
+</div>
+</div>
+</div>
+
+<!-- MINNATDORCHILIK -->
+<div class="gratitude-card glass-panel">
+<h3 style="font-size:1rem;font-weight:700;margin-bottom:12px">💭 Kunlik Minnatdorchilik</h3>
+<textarea id="reflection-input" placeholder="Bugun minnatdorman: ..." rows="2" style="resize:none;width:100%"></textarea>
+<button id="reflection-save" class="btn btn-secondary btn-sm" style="margin-top:12px">Saqlash</button>
+</div>
+</div>
+
+<!-- VIEW: SUPPORT -->
+<div class="app-view" id="view-support">
+<div class="view-header"><p class="view-eyebrow">Siz yolg'iz emassiz</p><h1 class="view-title">Ishonchli <span class="gradient-text">Yordam Markazi</span></h1><p class="view-subtitle">Har qanday qiyinchilikda ko'mak.</p></div>
+<div class="support-levels">
+<div class="support-level level-1 glass-panel"><div class="support-level-header"><div class="support-level-icon">💬</div><h3 class="support-level-title">1-bosqich: Ishongan insoningiz</h3></div><div class="support-level-content"><p>Sizni tinglay oladigan inson bilan suhbatlashing.</p><div class="support-options"><span class="tag">Ota-ona</span><span class="tag">Oila</span><span class="tag">Ustoz</span><span class="tag">Do'st</span></div></div></div>
+<div class="support-level level-2 glass-panel"><div class="support-level-header"><div class="support-level-icon">🩺</div><h3 class="support-level-title">2-bosqich: Mutaxassis ko'magi</h3></div><div class="support-level-content"><p>Malakali mutaxassis to'g'ri yechimni topishga yordam beradi.</p><div class="support-options"><span class="tag">Psixolog</span><span class="tag">Ruhiy salomatlik mutaxassisi</span><span class="tag">Shifokor</span></div></div></div>
+<div class="support-level level-3 glass-panel"><div class="support-level-header"><div class="support-level-icon">⚠️</div><h3 class="support-level-title">3-bosqich: Shoshilinch Yordam</h3></div><div class="support-level-content"><p>Xavf ostida bo'lsangiz zudlik bilan qo'ng'iroq qiling.</p><div class="support-options"><span class="tag" style="background:var(--danger);color:#fff;border:none;font-weight:700">📞 103 — Tez tibbiy yordam</span><span class="tag" style="background:var(--danger);color:#fff;border:none;font-weight:700">📞 112 — Yagona qutqaruv</span></div></div></div>
+</div>
+<div class="trust-grid" style="margin-top:40px">
+<div class="trust-card glass-panel" data-trust="privacy" role="button" tabindex="0" title="Batafsil ko'rish">
+  <div class="trust-icon">🔒</div>
+  <h3 class="trust-title">Maxfiylik</h3>
+  <p class="trust-description">Faqat qurilmangizda saqlanadi.</p>
+  <span class="trust-card-badge">Batafsil ↗</span>
+</div>
+<div class="trust-card glass-panel" data-trust="security" role="button" tabindex="0" title="Batafsil ko'rish">
+  <div class="trust-icon">🛡️</div>
+  <h3 class="trust-title">Xavfsizlik</h3>
+  <p class="trust-description">Zamonaviy xavfsizlik himoyasi.</p>
+  <span class="trust-card-badge">Batafsil ↗</span>
+</div>
+<div class="trust-card glass-panel" data-trust="control" role="button" tabindex="0" title="Batafsil ko'rish">
+  <div class="trust-icon">👤</div>
+  <h3 class="trust-title">Nazorat</h3>
+  <p class="trust-description">Istalgan payt boshqaring yoki o'chiring.</p>
+  <span class="trust-card-badge">Batafsil ↗</span>
+</div>
+<div class="trust-card glass-panel" data-trust="science" role="button" tabindex="0" title="Batafsil ko'rish">
+  <div class="trust-icon">📚</div>
+  <h3 class="trust-title">Ilmiy</h3>
+  <p class="trust-description">CBT psixologiyasiga asoslangan.</p>
+  <span class="trust-card-badge">Batafsil ↗</span>
+</div>
+</div>
+</div>
+
+<!-- TRUST DETAIL MODAL -->
+<div id="trust-modal" class="modal-backdrop" style="display:none">
+  <div class="modal-card glass-panel">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span id="trust-modal-icon" style="font-size:1.8rem">🔒</span>
+        <div>
+          <h3 id="trust-modal-title" style="font-size:1.2rem;font-weight:800;color:var(--text-primary)">Maxfiylik</h3>
+          <p id="trust-modal-subtitle" style="font-size:0.78rem;color:var(--text-tertiary)">Platforma xavfsizlik kafolatlari</p>
+        </div>
+      </div>
+      <button type="button" id="trust-modal-close" class="modal-close-btn">&times;</button>
+    </div>
+    <div id="trust-modal-body" class="modal-body" style="margin:20px 0;font-size:0.9rem;line-height:1.65;color:var(--text-secondary)"></div>
+    <div id="trust-modal-actions" class="modal-actions" style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"></div>
+  </div>
+</div>
+
+</main>
+
+<!-- MOBILE BOTTOM NAVIGATION (Telefonda pastki navigatsiya paneli) -->
+<nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+  <a class="mobile-nav-item active" data-view="overview" href="#" role="button">
+    <i data-lucide="layout-dashboard" width="19" height="19"></i>
+    <span>Asosiy</span>
+  </a>
+  <a class="mobile-nav-item" data-view="videos" href="#" role="button">
+    <i data-lucide="play-circle" width="19" height="19"></i>
+    <span>Videolar</span>
+  </a>
+  <a class="mobile-nav-item" data-view="ai" href="#" role="button">
+    <div class="mobile-nav-badge-wrap">
+      <i data-lucide="bot" width="19" height="19"></i>
+      <span class="mobile-ai-sparkle"></span>
+    </div>
+    <span>AI Bot</span>
+  </a>
+  <a class="mobile-nav-item" data-view="resources" href="#" role="button">
+    <i data-lucide="book-open" width="19" height="19"></i>
+    <span>Resurs</span>
+  </a>
+  <a class="mobile-nav-item" data-view="ruhiy" href="#" role="button">
+    <i data-lucide="sparkles" width="19" height="19"></i>
+    <span>Ruhiy</span>
+  </a>
+  <a class="mobile-nav-item" data-view="support" href="#" role="button">
+    <i data-lucide="heart-handshake" width="19" height="19"></i>
+    <span>Yordam</span>
+  </a>
+</nav>
+
+</div><!-- app-screen -->
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="https://js.puter.com/v2/"></script>
+<script src="js/storage.js?v=2.9"></script>
+<script src="js/auth.js?v=2.9"></script>
+<script src="js/app.js?v=2.9"></script>
+<script src="js/checkin.js?v=2.9"></script>
+<script src="js/dashboard.js?v=2.9"></script>
+<script src="js/resources.js?v=2.9"></script>
+<script src="js/ai-assistant.js?v=2.9"></script>
+<script src="js/reset.js?v=2.9"></script>
+<script src="js/video-curator.js?v=2.9"></script>
+<script src="js/cosmos-reset.js?v=2.9"></script>
+</body>
+</html>

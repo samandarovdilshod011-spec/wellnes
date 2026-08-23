@@ -1,0 +1,44 @@
+/**
+ * MindCare — sections.css
+ * Minimal overrides for app-views that aren't already covered by
+ * components.css.  The old landing-page section rules have been
+ * replaced by the new SPA view system.
+ */
+
+/* ── Global text helpers ──────────────────────────────────────────────────── */
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.accent-cyan {
+  color: var(--accent-cyan);
+}
+
+.margin-top-16 {
+  margin-top: 16px;
+}
+
+/* ── Support section overrides ────────────────────────────────────────────── */
+.support-level {
+  padding: 24px 28px;
+  transition: border-color 0.25s ease;
+}
+
+.support-level:hover {
+  border-left-width: 5px;
+}
+
+/* ── Check-in widget ──────────────────────────────────────────────────────── */
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
