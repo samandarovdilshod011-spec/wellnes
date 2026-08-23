@@ -77,22 +77,12 @@ function updateDashboardCards() {
       : 'E’tibor kerak (35%)';
   }
 
-  // Plan card — show next scheduled task for today
+  // Ruhiy Maydon card — direct link to breathing & relax music
   const planText = document.getElementById('dash-plan-text');
   const planSub  = document.getElementById('dash-plan-sub');
-  const now      = new Date();
-  const timeNow  = now.getHours() * 60 + now.getMinutes();
 
-  const upcoming = tasks
-    .filter(t => !t.isBreak)
-    .sort((a, b) => a.time.localeCompare(b.time))
-    .find(t => {
-      const [h, m] = (t.time || '00:00').split(':').map(Number);
-      return (h * 60 + m) >= timeNow;
-    });
-
-  if (planText) planText.textContent = upcoming ? upcoming.name : 'Nafas & Musiqa';
-  if (planSub)  planSub.textContent  = upcoming ? `Soat ${upcoming.time} da` : 'Ruhiy Maydonga o\'ting';
+  if (planText) planText.textContent = 'Nafas & Relaks';
+  if (planSub)  planSub.textContent  = '4-4-6 mashqi va tinch musiqa';
 }
 
 /* ── Weekly mood chart ────────────────────────────────────────────────────── */
