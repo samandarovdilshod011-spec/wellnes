@@ -262,6 +262,10 @@ const MindCareApp = (() => {
       case 'checkin':
         if (window.resetCheckin) window.resetCheckin();
         break;
+      case 'ruhiy':
+      case 'cosmos':
+        if (window.initCosmosReset) window.initCosmosReset();
+        break;
     }
   }
 
