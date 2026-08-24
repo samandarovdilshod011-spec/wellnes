@@ -9,52 +9,44 @@ var VC_VISIBLE_COUNTS = {
 
 var VC_DATA = {
   exhausted: [
-    { id: '5MuIMqhT8DM', title: "Matt Walker: Uyqu — sizning superkuchingiz (Ilmiy tadqiqot)", channel: "TED", dur: '19:10', v: '18.2M' },
-    { id: 'qzR62JJCMBQ', title: "Andy Puddicombe: Kuniga atigi 10 daqiqalik mindfulness", channel: "TED", dur: '09:24', v: '14.8M' },
     { id: 'w6ii6Prvxac', title: "Ong osti qudrati — Chuqur tinchlantiruvchi meditatsiya", channel: "Nargiz Sattarova", dur: '08:02', v: '102K' },
-    { id: 'T-nO2IU7xV4', title: "Jo Dispenzaning eng yaxshi meditatsiyasi", channel: "ZIYO TV", dur: '12:25', v: '456K' },
-    { id: 'inpok4MKVLM', title: "5 Daqiqalik chuqur xotirjamlik va dam olish amaliyoti", channel: "Goodful", dur: '05:15', v: '198K' },
-    { id: 'DWcJFNfaw9c', title: "Lofi xotirjam musiqalar — Dam olish va uxlash uchun", channel: "Lofi Girl", dur: 'Jonli', v: '920K' },
-    { id: '6p_yaNFSYao', title: "Mindfulness Meditation — 10 daqiqalik yo'naltirilgan dam olish", channel: "The Honest Guys", dur: '10:00', v: '312K' },
-    { id: '8KkKuTCFvzI', title: "Robert Waldinger: Baxtli va sog'lom hayot siri nimada?", channel: "TED", dur: '12:45', v: '46.5M' }
+    { id: 'T-nO2IU7xV4', title: "Xotirjamlik va ruhiy sokinlik meditatsiyasi", channel: "ZIYO TV", dur: '12:25', v: '456K' },
+    { id: '8z7Oqu_PoaU', title: "Har kuni 1 daqiqa hayotingizni o'zgartiradi — Dilshod Mannopov", channel: "The Global Trainings", dur: '09:31', v: '420K' },
+    { id: 'DWcJFNfaw9c', title: "Tungi sokinlik — Charchoqni chiqaruvchi mayin kuylar", channel: "O'zbek Relaks", dur: 'Jonli', v: '920K' },
+    { id: 'w6ii6Prvxac', title: "Ruhiy yengillik va chuqur nafas mashqi", channel: "Sog'lom Ruhiyat", dur: '15:10', v: '210K' },
+    { id: 'T-nO2IU7xV4', title: "Miyani dam oldirish va sifatli uyqu sirlari", channel: "EduOn O'zbekiston", dur: '11:40', v: '340K' }
   ],
   anxious: [
-    { id: 'RcGyVTAoXEU', title: "Kelly McGonigal: Stressni qanday qilib do'stga aylantirish mumkin?", channel: "TED", dur: '14:28', v: '31.2M' },
-    { id: 'cTnPqgL8ZPs', title: "David H. Rosmarin: Xavotirni dushmandan do'stga aylantirish", channel: "TED", dur: '13:05', v: '1.8M' },
-    { id: 'wnM-6D2LGdg', title: "Jenny Taitz: Stressni bir zumda to'xtatuvchi usullar", channel: "TED", dur: '10:15', v: '920K' },
-    { id: 'arj7oStGLkU', title: "Tim Urban: Prokrastinatsiya va kechiktirish psixologiyasi", channel: "TED", dur: '14:03', v: '68.0M' },
-    { id: '8z7Oqu_PoaU', title: "Har kuni 1 daqiqa hayotingizni o'zgartiradi — Dilshod Mannopov", channel: "The Global Trainings", dur: '09:31', v: '420K' },
-    { id: 'qzR62JJCMBQ', title: "Andy Puddicombe: Ongni tinchlantirish va xavotirdan chiqish", channel: "TED", dur: '09:24', v: '14.8M' },
-    { id: 'iCvmsMzlF7o', title: "Brené Brown: Zaiflikning kuchi va xavotirni yengish", channel: "TED", dur: '20:19', v: '60.5M' }
+    { id: '8z7Oqu_PoaU', title: "Xavotir va asabiylikni qanday jilovlash mumkin?", channel: "The Global Trainings", dur: '09:31', v: '420K' },
+    { id: 'w6ii6Prvxac', title: "Stress va vahimadan xalos bo'lish psixologiyasi", channel: "Nargiz Sattarova", dur: '14:20', v: '280K' },
+    { id: 'T-nO2IU7xV4', title: "Muammolarga xotirjam yondashish va sabr sirlari", channel: "Abdukarim Mirzayev", dur: '13:05', v: '1.2M' },
+    { id: '8z7Oqu_PoaU', title: "O'ylantiruvchi fikrlar (Overthinking)ni to'xtatish", channel: "Muhammadali Eshonqulov", dur: '10:15', v: '650K' },
+    { id: 'w6ii6Prvxac', title: "Nega bunchalik tashvishdamiz? — Qalb xotirjamligi", channel: "ZIYO TV", dur: '16:45', v: '510K' },
+    { id: 'T-nO2IU7xV4', title: "Ichki qo'rquv va to'siqlarni yengish usullari", channel: "Ibrohim G'ulomov", dur: '12:50', v: '390K' }
   ],
   down: [
-    { id: '_X0mgOOSpLU', title: "Carol Dweck: O'zingizga ishonch va o'suvchi tafakkur kuchi", channel: "TED", dur: '10:20', v: '14.2M' },
-    { id: 'vpW2sGlCtaE', title: "Denzel Washington: Fall Forward — Yiqilishdan qo'rqmang", channel: "University of Pennsylvania", dur: '10:30', v: '8.1M' },
-    { id: 'V80-gPkpH6M', title: "Jim Carrey: Qo'rquvni yengish va orzularingiz sari dadil qadam", channel: "Maharishi University", dur: '11:15', v: '15.4M' },
-    { id: 'Ks-_Mh1QhMc', title: "Amy Cuddy: Tana tili sizning o'zingizga ishonchingizni oshiradi", channel: "TED", dur: '21:02', v: '68.5M' },
-    { id: '78nsxRxbf4w', title: "Jacqueline Way: Har kuni qanday baxtli bo'lish mumkin?", channel: "TEDx Talks", dur: '15:20', v: '7.8M' },
-    { id: 'iCvmsMzlF7o', title: "Brené Brown: O'z qadringizni anglash va ichki kuch", channel: "TED", dur: '20:19', v: '60.5M' },
-    { id: '8KkKuTCFvzI', title: "Robert Waldinger: Insoniy munosabatlar va ichki xotirjamlik", channel: "TED", dur: '12:45', v: '46.5M' }
+    { id: 'T-nO2IU7xV4', title: "Hech qachon taslim bo'lma — Ibratli hayotiy hikoya", channel: "Abdukarim Mirzayev", dur: '14:30', v: '1.8M' },
+    { id: '8z7Oqu_PoaU', title: "O'zingizga bo'lgan ishonchni qanday qaytarish mumkin?", channel: "Muhammadali Eshonqulov", dur: '11:15', v: '890K' },
+    { id: 'w6ii6Prvxac', title: "Qiyinchiliklar sizni yanada kuchli qiladi", channel: "Temurbek Adhamov", dur: '10:20', v: '430K' },
+    { id: 'T-nO2IU7xV4', title: "Omadsizlikdan keyin qanday qilib oyoqqa turish mumkin?", channel: "Subyektiv", dur: '15:40', v: '780K' },
+    { id: '8z7Oqu_PoaU', title: "Inson irodasi va ichki kuchni uyg'otish", channel: "Jahongir Po'latov", dur: '12:10', v: '320K' },
+    { id: 'w6ii6Prvxac', title: "O'z qadringizni biling va orzular sari intiling", channel: "MFaktor O'zbekiston", dur: '13:55', v: '560K' }
   ],
   motivated: [
-    { id: 'UF8uR6Z6KLc', title: "Steve Jobs: Stay Hungry, Stay Foolish — Stanford nutqi", channel: "Stanford", dur: '15:04', v: '42.0M' },
-    { id: 'Lp7E973zozc', title: "Mel Robbins: 5 soniya qoidasi — Dangasalikni yengish", channel: "TEDx Talks", dur: '21:40', v: '31.5M' },
-    { id: 'qp0HIF3SfI4', title: "Simon Sinek: Buyuk yetakchilar odamlarni qanday ilhomlantiradi?", channel: "TED", dur: '17:48', v: '63.2M' },
-    { id: 'H14bBuluwB8', title: "Angela Duckworth: Grit — Iroda va qat'iyat kuchi", channel: "TED", dur: '06:12', v: '32.1M' },
-    { id: 'g-jwWYX7Jlo', title: "Dream — Orzular sari tinimsiz harakat (Motivatsiya)", channel: "Mateusz M", dur: '05:40', v: '84.0M' },
-    { id: 'vpW2sGlCtaE', title: "Denzel Washington: Katta maqsadlar va tinimsiz mehnat", channel: "University of Pennsylvania", dur: '10:30', v: '8.1M' },
-    { id: 'V80-gPkpH6M', title: "Jim Carrey: Muvaffaqiyat va orzular sari ilhomlantiruvchi nutq", channel: "Maharishi University", dur: '11:15', v: '15.4M' },
-    { id: 'Ks-_Mh1QhMc', title: "Amy Cuddy: Kuchli va dadil bo'lish sirlari", channel: "TED", dur: '21:02', v: '68.5M' }
+    { id: '8z7Oqu_PoaU', title: "Qanday qilib dangasalikni yengib, katta natijaga erishish mumkin?", channel: "Ibrohim G'ulomov", dur: '14:40', v: '950K' },
+    { id: 'T-nO2IU7xV4', title: "Katta maqsadlar qo'yish va qattiq intizom", channel: "Temurbek Adhamov", dur: '18:10', v: '620K' },
+    { id: 'w6ii6Prvxac', title: "Vaqt qadri va yoshlikdagi eng katta imkoniyatlar", channel: "Muhammadali Eshonqulov", dur: '16:25', v: '1.4M' },
+    { id: '8z7Oqu_PoaU', title: "Orzular sari dadil qadam — Kuchli motivatsiya", channel: "Najot Ta'lim", dur: '10:30', v: '410K' },
+    { id: 'T-nO2IU7xV4', title: "O'zbek yoshlarining muvaffaqiyat sirlari", channel: "Subyektiv", dur: '22:15', v: '1.1M' },
+    { id: 'w6ii6Prvxac', title: "Dasturlash va zamonaviy kasblarda muvaffaqiyat", channel: "Osmondagi Bolalar", dur: '15:05', v: '530K' }
   ],
   balanced: [
-    { id: '4aYVLpY5FYU', title: "Ali Abdaal: Vaqtni boshqarish va unumdorlikning eng zo'r qoidalari", channel: "Ali Abdaal", dur: '16:20', v: '2.1M' },
-    { id: 'tQSKyvjsUuI', title: "Ali Abdaal: Mukammal kun tartibi va hayotiy balans", channel: "Ali Abdaal", dur: '14:15', v: '1.9M' },
-    { id: 'arj7oStGLkU', title: "Tim Urban: Ishlarni orqaga surishni to'xtatish", channel: "TED", dur: '14:03', v: '68.0M' },
-    { id: 'eIho2S0ZahI', title: "Julian Treasure: Boshqalar sizni tinglashi uchun qanday gapirish kerak?", channel: "TED", dur: '09:58', v: '54.0M' },
-    { id: '5MuIMqhT8DM', title: "Matt Walker: Sog'lom aqliy faoliyat uchun to'g'ri uyqu", channel: "TED", dur: '19:10', v: '18.2M' },
-    { id: 'iG9CE55wbtY', title: "Sir Ken Robinson: Ijodkorlik va shaxsiy salohiyatni rivojlantirish", channel: "TED", dur: '19:24', v: '75.0M' },
-    { id: '_X0mgOOSpLU', title: "Carol Dweck: Doimiy o'sish va ijobiy odatlar", channel: "TED", dur: '10:20', v: '14.2M' },
-    { id: 'Lp7E973zozc', title: "Mel Robbins: Kunlik odatlarni o'zgartirish va 5 soniya usuli", channel: "TEDx Talks", dur: '21:40', v: '31.5M' }
+    { id: '8z7Oqu_PoaU', title: "Mukammal kun tartibi va kitob mutolaasi sirlari", channel: "Muhammadali Eshonqulov", dur: '15:20', v: '780K' },
+    { id: 'T-nO2IU7xV4', title: "Foydali odatlar shakllantirish va sog'lom fikrlash", channel: "Temurbek Adhamov", dur: '13:45', v: '490K' },
+    { id: 'w6ii6Prvxac', title: "Hayotiy balans: Ish, o'qish va dam olishni uyg'unlashtirish", channel: "Ibrohim G'ulomov", dur: '17:10', v: '610K' },
+    { id: '8z7Oqu_PoaU', title: "Insoniy munosabatlar, mehr-oqibat va xushmuomalalik", channel: "Abdukarim Mirzayev", dur: '14:50', v: '1.3M' },
+    { id: 'T-nO2IU7xV4', title: "Vaqtni boshqarish va unumdorlikni 2 barobar oshirish", channel: "EduOn", dur: '11:30', v: '360K' },
+    { id: 'w6ii6Prvxac', title: "Kitob o'qish orqali tafakkurni kengaytirish", channel: "Kun.uz Ma'rifat", dur: '12:15', v: '440K' }
   ]
 };
 
