@@ -33,59 +33,123 @@
     return null;
   }
 
-  /* ═══ 1. SMART NATURAL CONVERSATIONAL ENGINE ═══ */
+  /* ═══ 1. UNIVERSAL CHATGPT INTELLIGENCE ENGINE ═══ */
   function getSmartChatGPTReply(text) {
-    var l = (text || '').toLowerCase().trim();
-    var clean = l.replace(/['`’‘]/g, '').replace(/[^a-z0-9\s]/g, ' ');
+    var raw = (text || '').trim();
+    var l = raw.toLowerCase();
+    var clean = l.replace(/['`’‘]/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 
-    if (clean.match(/\b(zormisan|zormisiz|zo'rmisan|zo'rmisiz|qalesan|qalesiz|qandaysan|qandaysiz|qalaysan|qalaysiz|ahvol|ahvollar|tinchmi|tinchlikmi|nima gap|nima gaplar|ishlar qalay|yaxshimisiz|tuzukmisiz)\b/)) {
-      var salomResponses = [
-        "Rahmat, juda yaxshi! O'zingizda nima gaplar? Kuningiz qanday o'tyapti? Qanday savolingiz bo'lsa bemalol bering, barchasiga javob berishga tayyorman.",
-        "Zo'r, rahmat! Siz yaxshimisiz? Bugun qanday rejalaringiz bor yoki qaysi mavzuda suhbatlashamiz?",
-        "Hammasi ajoyib! Sizning hol-ahvollaringiz qalay? Sizga qanday yordam bera olaman?"
+    /* 1. Salomlashish va hol-ahvol */
+    if (clean.match(/\b(zormisan|zormisiz|zo'rmisan|zo'rmisiz|qalesan|qalesiz|qandaysan|qandaysiz|qalaysan|qalaysiz|ahvol|ahvollar|tinchmi|tinchlikmi|nima gap|nima gaplar|ishlar qalay|yaxshimisiz|tuzukmisiz|yaxshimisilar|nima gapla|tinchmisan|tinchmisiz)\b/)) {
+      var salomReplies = [
+        "Rahmat, juda yaxshi! O'zingizda nima gaplar? Kuningiz qanday o'tyapti? Qanday savol yoki yordam kerak bo'lsa, bemalol ayting — barchasiga javob berishga tayyorman.",
+        "Zo'r, rahmat! Siz yaxshimisiz? Qanday yangiliklar bor? Bugun qaysi mavzuda suhbatlashamiz yoki qanday vazifada yordam beray?",
+        "Hammasi ajoyib! Sizning hol-ahvollaringiz qalay? Ilm-fan, dasturlash, maslahat yoki shunchaki erkin suhbat uchun xizmatingizdaman."
       ];
-      return salomResponses[Math.floor(Math.random() * salomResponses.length)];
+      return salomReplies[Math.floor(Math.random() * salomReplies.length)];
     }
 
-    if (clean.match(/\b(salom|assalom|assalomu|privet|salam|hayrli tong|xayrli tong|hayrli kun|xayrli kun|hayrli kech|xayrli kech)\b/)) {
-      return "Assalomu alaykum! Xush kelibsiz. Qanday savolingiz yoki yordam kerak bo'lgan mavzu bor? Bemalol yozing.";
+    if (clean.match(/\b(salom|assalom|assalomu|assalomu alaykum|privet|salam|hayrli tong|xayrli tong|hayrli kun|xayrli kun|hayrli kech|xayrli kech|salomaleykum)\b/)) {
+      return "Assalomu alaykum! Xush kelibsiz. Qanday savolingiz yoki yordam kerak bo'lgan mavzu bor? Bemalol yozing, to'liq yordam beraman.";
     }
 
-    if (clean.match(/\b(kimsan|kimsen|sen kimsan|nima qila olasan|vazifang nima|nima bilasan|botmisan|robotmisan|isming nima|qobiliyating)\b/)) {
-      return "Men sizning shaxsiy ChatGPT sun'iy intellekt yordamchingizman.\n\nMenga xohlagan savolingizni berishingiz mumkin:\n• Ilm-fan, texnologiya, dasturlash va kod yozish\n• Matematik va mantiqiy masalalar\n• Psixologiya, stressni boshqarish va hayotiy maslahatlar\n• O'qish, imtihonlar va vaqtni rejalashtirish\n• Erkin do'stona suhbat va savol-javoblar\n\nHozir sizni qaysi mavzu qiziqtiryapti?";
+    /* 2. AI shaxsi va qobiliyatlari */
+    if (clean.match(/\b(kimsan|kimsen|sen kimsan|nima qila olasan|vazifang nima|nima bilasan|botmisan|robotmisan|isming nima|qobiliyating|qobiliyatlaring|haqingda)\b/)) {
+      return "Men universal **ChatGPT sun'iy intellekt yordamchingizman**.\n\nMenga istalgan sohada savol berishingiz mumkin:\n• **Dasturlash va IT:** Kod yozish, xatolarni to'g'rilash, arxitektura (Python, JS, C++, HTML/CSS, SQL...)\n• **Ilm-fan va Ta'lim:** Matematika, fizika, tarix, biologiya, kimyo, astronomiya\n• **Ruhiy salomatlik va CBT:** Stress, overthinking, motivatsiya, uyqu, vaqtni boshqarish\n• **Tillar va Matnlar:** Ingliz tili, tarjima, insho, maqola, she'r va tabriklar\n• **Erkin suhbat:** Hayotiy maslahatlar va har qanday kundalik savollar\n\nHozir sizga qaysi yo'nalishda yordam beray?";
     }
 
-    if (clean.match(/\b(rahmat|raxmat|katta rahmat|tashakkur|minnatdorman|spasibo|yordam berding|gap yoq|gap yo'q|tushundim)\b/)) {
-      return "Arzimaydi, yordam berganimdan juda xursandman! Yana biror savolingiz yoki fikringiz bo'lsa, bemalol yozavering.";
+    /* 3. Minnatdorchilik va ijobiy hislar */
+    if (clean.match(/\b(rahmat|raxmat|katta rahmat|tashakkur|minnatdorman|spasibo|yordam berding|gap yoq|gap yo'q|tushundim|zor ekan|zo'r ekan|ajoyib|molodes|yashavor)\b/)) {
+      var thanksReplies = [
+        "Arzimaydi, yordam berganimdan juda xursandman! Yana biror savolingiz yoki fikringiz bo'lsa, bemalol yozavering.",
+        "Sizga foydam tekkanidan baxtiyorman! Doim xizmatingizdaman.",
+        "Rahmat! O'zingizni ehtiyot qiling. Har qanday vaqtda yangi savollaringizni kutaman."
+      ];
+      return thanksReplies[Math.floor(Math.random() * thanksReplies.length)];
     }
 
-    if (clean.match(/\b(zor|zo'r|yaxshiman|ajoyib|juda yaxshi|alhamdulillah|shukur|yomon emas)\b/)) {
-      return "Buni eshitishdan xursandman! Ijobiy kayfiyat davom etsin. Bugun nimalar ustida ishlamoqchisiz yoki qanday mavzuda fikr almashamiz?";
+    if (clean.match(/\b(zor|zo'r|yaxshiman|hammasi joyida|shukur|alhamdulillah|yomon emas|kayfiyatim a'lo|kayfiyatim alo)\b/)) {
+      return "Buni eshitishdan bag'oyat xursandman! Ijobiy kayfiyat davom etsin. Bugun qanday qiziqarli rejalaringiz bor yoki qaysi mavzuda fikr almashamiz?";
     }
 
-    if (clean.match(/\b(kod|dasturlash|programming|python|javascript|html|css|react|sql|java|c\+\+|sayt|backend|frontend)\b/)) {
-      return "**Dasturlash bo'yicha yordam:**\n\nMen JavaScript, Python, C++, HTML/CSS, SQL va boshqa ko'plab tillarda kod yozish, xatolarni (bug) topish yoki loyihangiz arxitekturasini tuzishda yordam bera olaman.\n\nAynan qaysi tilda qanday kod yozishimiz kerak? Kod parchasini yoki vazifani yozing.";
+    /* 4. Dasturlash va IT */
+    if (clean.match(/\b(javascript|python|c\+\+|java|html|css|react|node|sql|php|dasturlash|kod|kod yoz|kod yozib ber|programming|developer|frontend|backend|algoritm|bug|framework|git|linux|api)\b/)) {
+      if (clean.match(/\b(python)\b/)) {
+        return "**Python dasturlash tili bo'yicha ma'lumot va yordam:**\n\nPython — o'rganish oson, sodda sintaksisga ega va sun'iy intellekt, data science, web backend (Django/FastAPI) sohalarida eng mashhur tildir.\n\n```python\n# Misol: Funksiya va ro'yxat bilan ishlash\ndef salomlash(ism):\n    return f\"Salom, {ism}! Dasturlash olamiga xush kelibsiz.\"\n\nprint(salomlash(\"Foydalanuvchi\"))\n```\n\nAynan qanday algoritm yoki kod yozishimiz kerak? Vazifangizni batafsil yozing.";
+      }
+      if (clean.match(/\b(javascript|js)\b/)) {
+        return "**JavaScript dasturlash tili:**\n\nJavaScript — zamonaviy veb-saytlarning interaktivligi, brauzer ilovalari va Node.js orqali backend yaratishda yetakchi tildir.\n\n```javascript\n// Misol: Asinxron ma'lumot olish\nasync function getData(url) {\n  const res = await fetch(url);\n  return await res.json();\n}\n```\n\nSizga qaysi qismida yordam kerak? Kod parchasini yuboring.";
+      }
+      return "**Dasturlash va IT bo'yicha yordam:**\n\nMen JavaScript, Python, C++, HTML/CSS, SQL, React, PHP va boshqa tillarda:\n1. Kod yozish va funksiyalar tuzish\n2. Xatolarni (bug) topish va to'g'rilash\n3. Algoritmik masalalarni yechish\n4. Loyiha arxitekturasini rejalashtirishda yordam bera olaman.\n\nAynan qaysi tilda qanday vazifani bajarishimiz kerak?";
     }
 
-    if (clean.match(/\b(xavotir|qorquv|qo'rquv|vahima|stress|bezovta|siqildim|asab|tashvish)\b/)) {
-      return "**Stress va xavotirni yengish bo'yicha tavsiyalar:**\n\n1. **Fakt va taxminni ajrating:** Xavotir ko'pincha miyaning noaniqlikni eng yomon ssenariy sifatida tasavvur qilishidan kelib chiqadi. Haqiqatda nima sodir bo'layotganiga qarang.\n2. **Nazorat zonasi:** Faqat o'zingiz o'zgartira oladigan narsalarga diqqat qarating.\n3. **Chuqur nafas oling:** 4 soniya burundan nafas oling, 4 soniya ushlab turing va 6 soniya og'izdan chiqaring.\n\nSizni aynan nima bezovta qilyapti? Xohlasangiz batafsil aytib bering.";
+    /* 5. Matematika va hisob-kitob tushunchalari */
+    if (clean.match(/\b(matematika|algebra|geometriya|integral|hosila|tenglama|ildiz|foiz|formula|hisobla|pi soni)\b/)) {
+      return "**Matematik yordam:**\n\nMen algebra, geometriya, tenglamalar, foiz hisoblash va mantiqiy masalalarni yechishda yordam beraman.\n\nMasalan:\n• Oddiy amallar: `(100 * 5) / 2 = 250`\n• Foiz hisoblash: 500 ning 15% i = `500 * 0.15 = 75`\n• Kvadrat tenglama: `ax^2 + bx + c = 0` formulasi: `D = b^2 - 4ac`\n\nMasalangiz shartini yoki hisob-kitobni yozing, birga yechamiz!";
     }
 
-    if (clean.match(/\b(dangasa|erinchoq|erin|surish|kechiktir|boshlay olmayapman|iroda|prokrastinatsiya)\b/)) {
-      return "**Dangasalikni yengish strategiyasi:**\n\n• **2 daqiqa qoidasi:** Ishni butunlay qilish haqida emas, faqat birinchi 2 daqiqasini qilish haqida o'ylang (masalan, daftarni ochish yoki bitta qator kod yozish).\n• **5-4-3-2-1 hisobi:** Orqaga sanang va ortiqcha o'ylamay darhol harakatga o'ting.\n\nQaysi vazifani boshlash kerak? Keling, uni eng kichik qadamlarga bo'lamiz.";
+    /* 6. Tarix va Buyuk Allomalar */
+    if (clean.match(/\b(amir temur|temur|alisher navoiy|navoiy|ibn sino|ulug'bek|ulugbek|al xorazmiy|beruniy|bobur|tarix|ozbekiston tarixi|samarqand|buxoro)\b/)) {
+      if (clean.match(/\b(amir temur|temur)\b/)) {
+        return "**Sohibqiron Amir Temur (1336–1405):**\n\nBuyuk sarkarda, davlat arbobi va qudratli Temuriylar saltanatining asoschisi.\n• **Shiori:** *\"Kuch — adolatdadir!\"*\n• **Merosi:** Samarqandni jahonning eng go'zal ilm-fan va me'morchilik markaziga aylantirgan. Saltanatida fan, madaniyat, savdo-sotiq (Buyuk Ipak Yo'li) va obodonchilik yuksak darajaga ko'tarilgan.";
+      }
+      if (clean.match(/\b(alisher navoiy|navoiy)\b/)) {
+        return "**Alisher Navoiy (1441–1501):**\n\nBuyuk o'zbek shoiri, mutafakkir va davlat arbobi. Turkiy tilning boyligi va go'zalligini butun dunyoga isbotlagan.\n• **Asosiy asari:** \"Xamsa\" (Besh doston: Hayrat ul-abror, Farhod va Shirin, Layli va Majnun, Sab'ai sayyor, Saddi Iskandariy).\n• **Hikmat:** *\"Oz-oz o'rganib dono bo'lur, qatra-qatra yig'ilib daryo bo'lur.\"*";
+      }
+      if (clean.match(/\b(ibn sino|avitsenna)\b/)) {
+        return "**Abu Ali ibn Sino (980–1037):**\n\nBuyuk tabib, faylasuf va olim. G'arbda \"Avitsenna\" nomi bilan mashhur.\n• **Mashhur asari:** \"Tib qonunlari\" (Al-Qonun fit-tibb) bir necha asrlar davomida Yevropa universitetlarida asosiy tibbiyot darsligi bo'lib xizmat qilgan.";
+      }
+      return "**O'zbekiston tarixi va buyuk ajdodlarimiz:**\n\nBizning zaminimiz Al-Xorazmiy (algoritm asoschisi), Ibn Sino, Mirzo Ulug'bek, Alisher Navoiy va Amir Temur kabi jahon sivilizatsiyasiga ulkan hissa qo'shgan allomalarning vatanidir. Qaysi alloma yoki tarixiy davr haqida batafsil ma'lumot olishni xohlaysiz?";
     }
 
-    if (clean.match(/\b(uyqu|uxlay|charchad|quvvat|holsiz|uyqusizlik|kechasi)\b/)) {
-      return "**Uyqu va quvvatni tiklash:**\n\n• Uyqudan 1 soat oldin ekranlarni (telefon, noutbuk) chetga suring.\n• Xonani shamollatib, salqin havo yarating.\n• Bir stakan iliq suv yoki choy ichib, miyani tinchlantirish.\n\nBugun o'zingizga to'liq dam olish uchun imkoniyat bering.";
+    /* 7. Ilm-fan, Koinot va Tabiat */
+    if (clean.match(/\b(quyosh|oy|yer|koinot|galaktika|sayyora|mars|yulduz|atom|fotosintez|gravitatsiya|fizika|kimyo|biologiya)\b/)) {
+      return "**Ilm-fan va Koinot haqida qiziqarli faktlar:**\n\n• **Quyosh tizimi:** Quyosh butun tizim massasining 99.86% ini tashkil qiladi.\n• **Yorug'lik tezligi:** Soniyasiga 300,000 km. Quyosh nuri Yerga taxminan 8 daqiqa 20 soniyada yetib keladi.\n• **Atom:** Moddaning eng kichik bo'lagi bo'lib, uning markazida proton va neytronlardan iborat yadro, atrofida esa elektronlar aylanadi.\n\nQaysi ilmiy mavzuni batafsil tushuntirib beray?";
     }
 
-    var defaults = [
-      "Fikringizni tushundim. Bu masala haqida yana qanday aniq savollaringiz yoki rejalaringiz bor? Batafsil davom ettirishimiz mumkin.",
-      "Ajoyib savol. Buni tahlil qilish uchun quyidagi jihatlarga e'tibor qaratishimiz mumkin. Sizga aynan qaysi yo'nalishda batafsil ma'lumot kerak?",
-      "Sizni tinglayapman. Istalgan mavzuda — bilim, maslahat, tahlil yoki kod bo'yicha savolingizni bering, to'liq tushuntirib beraman."
-    ];
+    /* 8. Ingliz tili va chet tillari */
+    if (clean.match(/\b(ingliz tili|english|ielts|cefr|tarjima|grammar|lugat|sozlashuv|vocabulary)\b/)) {
+      return "**Ingliz tilini o'rganish bo'yicha maslahatlar:**\n\n1. **Kunlik 20 daqiqa:** Har kuni kamida 10-15 ta yangi so'zni kontekst (gaplar) ichida yodlang.\n2. **Tinglash (Listening):** Podkastlar, YouTube videolari va inglizcha subtitrli filmlar ko'ring.\n3. **Shadowing texnikasi:** Eshitgan jumlalaringizni talaffuzini aynan qaytarib gapiring.\n4. **IELTS/CEFR:** Asosiy e'tiborni Reading (tez o'qish) va Writing strukturalariga qarating.\n\nBiror so'z, gap yoki qoidani tushuntirib yoki tarjima qilib beraymi?";
+    }
 
-    return defaults[(defIdx++) % defaults.length];
+    /* 9. Psixologiya, Ruhiy salomatlik va CBT */
+    if (clean.match(/\b(stress|xavotir|qorquv|qo'rquv|vahima|bezovta|siqildim|asab|overthinking|miyam|charchadim|tushkun|depressiya|yolg'iz|yolgiz)\b/)) {
+      return "**Ruhiy xotirjamlik va stressni yengish (CBT usuli):**\n\n1. **Fakt va Fikrni ajrating:** Xavotir — bu ko'pincha miyamizning kelajak haqidagi taxmini xolos, xolis haqiqat emas.\n2. **4-4-6 Nafas mashqi:** 4 soniya burundan chuqur nafas oling, 4 soniya ushlab turing va 6 soniya sekin og'izdan chiqaring. Bu asab tizimini 1 daqiqada tinchlantiradi.\n3. **Nazorat zonasi:** O'zingiz o'zgartira olmaydigan narsalarga ortiqcha energiya sarflamang.\n\nSizni aynan qaysi fikr yoki vaziyat ko'proq qiynayapti? Bemalol aytib bering, birgalikda yechim topamiz.";
+    }
+
+    /* 10. Dangasalik, Motivatsiya va Unumdorlik */
+    if (clean.match(/\b(dangasa|dangasalik|erinchoq|erin|prokrastinatsiya|boshlay olmayapman|iroda|motivatsiya|ilhom|unumdorlik|reja|vaqt|pomodoro)\b/)) {
+      return "**Dangasalikni yengish va yuqori motivatsiya:**\n\n• **2 daqiqa qoidasi:** Ishni butunlay tugatish haqida emas, faqat birinchi 2 daqiqasini qilish haqida o'ylang (masalan, daftarni ochish yoki stolga o'tirish).\n• **Pomodoro usuli:** 25 daqiqa to'liq diqqat bilan ishlang va 5 daqiqa dam oling.\n• **5-4-3-2-1 hisobi:** Orqaga sanang va hech narsa o'ylamay darhol harakatga o'ting.\n\nQaysi ishni boshlash kerak? Keling, uni eng kichik 1-qadamga bo'lamiz.";
+    }
+
+    /* 11. Uyqu va Dam olish */
+    if (clean.match(/\b(uyqu|uxlay|uyqusizlik|kechasi|uyqum kelmayapti|tinchlanish)\b/)) {
+      return "**Sog'lom uyqu va quvvatni tiklash:**\n\n• Yotishdan 45 daqiqa oldin barcha ekranlarni (telefon, kompyuter) chetga suring.\n• Xonani shamollatib, salqin va qorong'i muhit yarating.\n• Bir stakan iliq suv yoki yalpizli choy iching.\n• Miya tinchlanishi uchun xayolingizdagi rejalarni qog'ozga yozib qo'ying.\n\nBugun o'zingizga to'liq dam olish uchun imkoniyat bering.";
+    }
+
+    /* 12. Ijod, She'r, Hikoya va Tabriklar */
+    if (clean.match(/\b(she'r|sher|tabrik|tavallud|tug'ilgan kun|hikoya|maqol|hikmat|yozib ber)\b/)) {
+      if (clean.match(/\b(tabrik|tug'ilgan kun)\b/)) {
+        return "**Tug'ilgan kun uchun samimiy tabrik:**\n\n\"Sizni bugungi qutlug' ayyom — tavallud kuningiz bilan chin qalbimdan muborakbod etaman! Sizga mustahkam sog'liq, cheksiz quvonch, oilaviy xotirjamlik va barcha ezgu niyatlaringizga yetishishingizni tilayman. Har bir kuningiz yangi marralar va omadlarga boy bo'lsin!\"";
+      }
+      return "**Hikmatli satrlar:**\n\n*Intilsang har kuni yangi marraga,*\n*Yetasan orzuying bo'lgan cho'qqiga.*\n*Sabr ila qo'yilgan har bitta qadam,*\n*Albatta eltadi yorug' kunlarga.*\n\nQanday mavzuda yoki kim uchun maxsus matn yozib beray?";
+    }
+
+    /* 13. Ta'lim, DTM va Imtihonlar */
+    if (clean.match(/\b(imtihon|dtm|sessiya|universitet|maktab|dars|test|tayyorgarlik|talaba)\b/)) {
+      return "**Imtihonlarga samarali tayyorgarlik sirlari:**\n\n1. **Faol eslash (Active Recall):** O'qigan materialingizni kitobga qaramasdan o'z so'zlaringiz bilan aytib berishga harakat qiling.\n2. **Interval takrorlash (Spaced Repetition):** Mavzuni 1 kundan, 3 kundan va 7 kundan keyin qayta takrorlang.\n3. **Testlar ustida ishlash:** Xato qilgan savollaringizni alohida daftarga qayd qilib, tahlil qiling.\n\nAynan qaysi fan yoki yo'nalishga tayyorgarlik ko'ryapsiz?";
+    }
+
+    /* 14. Universal Smart Dynamic Fallback (Har qanday erkin savol uchun) */
+    var words = clean.split(' ').filter(function(w) { return w.length > 2; });
+    var topic = words.slice(0, 3).join(' ');
+
+    return "**\"" + (topic ? topic.toUpperCase() : "Savolingiz") + "\" bo'yicha tahlil va javob:**\n\n" +
+           "Siz ko'targan ushbu masala juda qiziq va muhim hisoblanadi. Bu bo'yicha quyidagi asosiy jihatlarni ajratib ko'rsatish mumkin:\n\n" +
+           "1. **Mavzuning mohiyati:** Har qanday savol yoki vazifani to'g'ri yechish uchun avvalo uning asosiy sabablari va maqsadini aniq belgilab olish lozim.\n" +
+           "2. **Amaliy tavsiya:** Katta masalalarni kichik bosqichlarga ajratib, bosqichma-bosqich harakat qilish eng yuqori natijani beradi.\n" +
+           "3. **Tahlil va xulosa:** Doimiy o'rganish, sabr va xolis yondashuv orqali bu borada muvaffaqiyatga erishish mumkin.\n\n" +
+           "Agar sizga ushbu mavzu bo'yicha aniqroq misol, kod, hisob-kitob yoki batafsil ma'lumot kerak bo'lsa, savolingizni kengaytirib yozing — to'liq tushuntirib beraman!";
   }
 
   /* ═══ 3. CHAT XABARLARINI CHIQARISH ═══ */
