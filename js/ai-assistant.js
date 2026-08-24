@@ -140,16 +140,16 @@
       return "**Imtihonlarga samarali tayyorgarlik sirlari:**\n\n1. **Faol eslash (Active Recall):** O'qigan materialingizni kitobga qaramasdan o'z so'zlaringiz bilan aytib berishga harakat qiling.\n2. **Interval takrorlash (Spaced Repetition):** Mavzuni 1 kundan, 3 kundan va 7 kundan keyin qayta takrorlang.\n3. **Testlar ustida ishlash:** Xato qilgan savollaringizni alohida daftarga qayd qilib, tahlil qiling.\n\nAynan qaysi fan yoki yo'nalishga tayyorgarlik ko'ryapsiz?";
     }
 
-    /* 14. Universal Smart Dynamic Fallback (Har qanday erkin savol uchun) */
+    /* 14. Universal Smart Dynamic Fallback */
     var words = clean.split(' ').filter(function(w) { return w.length > 2; });
     var topic = words.slice(0, 3).join(' ');
 
     return "**\"" + (topic ? topic.toUpperCase() : "Savolingiz") + "\" bo'yicha tahlil va javob:**\n\n" +
-           "Siz ko'targan ushbu masala juda qiziq va muhim hisoblanadi. Bu bo'yicha quyidagi asosiy jihatlarni ajratib ko'rsatish mumkin:\n\n" +
-           "1. **Mavzuning mohiyati:** Har qanday savol yoki vazifani to'g'ri yechish uchun avvalo uning asosiy sabablari va maqsadini aniq belgilab olish lozim.\n" +
-           "2. **Amaliy tavsiya:** Katta masalalarni kichik bosqichlarga ajratib, bosqichma-bosqich harakat qilish eng yuqori natijani beradi.\n" +
-           "3. **Tahlil va xulosa:** Doimiy o'rganish, sabr va xolis yondashuv orqali bu borada muvaffaqiyatga erishish mumkin.\n\n" +
-           "Agar sizga ushbu mavzu bo'yicha aniqroq misol, kod, hisob-kitob yoki batafsil ma'lumot kerak bo'lsa, savolingizni kengaytirib yozing — to'liq tushuntirib beraman!";
+           "Siz ko'targan ushbu masala juda muhim hisoblanadi. Bu bo'yicha quyidagi asosiy tavsiyalarni e'tiborga olishingizni maslahat beraman:\n\n" +
+           "1. **Mavzuning mohiyati:** Har qanday vazifada asosiy maqsadni aniq belgilash natijaning 50% ini tashkil qiladi.\n" +
+           "2. **Amaliy qadam:** Ishni kichik bo'laklarga ajrating va eng sodda qismidan boshlang.\n" +
+           "3. **Doimiy rivojlanish:** Izlanish, sabr va to'g'ri rejalashtirish har qanday qiyinchilikni yengishga yordam beradi.\n\n" +
+           "Agar ushbu mavzu bo'yicha aniqroq misol, kod, hisob-kitob yoki batafsil ma'lumot kerak bo'lsa, bemalol so'rang!";
   }
 
   /* ═══ 3. CHAT XABARLARINI CHIQARISH ═══ */
@@ -212,10 +212,13 @@
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        var res = JSON.parse(xhr.responseText);
-        callback(null, res.candidates[0].content.parts[0].text);
-      } else { callback(new Error('Gemini error')); }
+        try {
+          var res = JSON.parse(xhr.responseText);
+          callback(null, res.candidates[0].content.parts[0].text);
+        } catch(e) { callback(e); }
+      } else { callback(new Error('Gemini error: ' + xhr.status)); }
     };
+    xhr.onerror = function() { callback(new Error('Network error')); };
     xhr.send(JSON.stringify(payload));
   }
 
@@ -228,10 +231,13 @@
     xhr.setRequestHeader('Authorization', 'Bearer ' + apiKey.trim());
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        var res = JSON.parse(xhr.responseText);
-        callback(null, res.choices[0].message.content);
-      } else { callback(new Error('API error')); }
+        try {
+          var res = JSON.parse(xhr.responseText);
+          callback(null, res.choices[0].message.content);
+        } catch(e) { callback(e); }
+      } else { callback(new Error('API error: ' + xhr.status)); }
     };
+    xhr.onerror = function() { callback(new Error('Network error')); };
     xhr.send(JSON.stringify(payload));
   }
 
